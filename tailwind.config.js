@@ -1,0 +1,51 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  theme: {
+    extend: {
+      colors: {
+        fireRed: {
+          50: '#ffeeee',
+          100: '#ffdada',
+          200: '#ffbbbb',
+          300: '#ff8b8b',
+          400: '#ff4949',
+          500: '#ff1111',
+          600: '#ff0000',
+          700: '#e70000',
+          800: '#be0000',
+          900: '#810000',
+          950: '#560000',
+        },
+        fireYellow: {
+          50: '#fefee8',
+          100: '#ffffc2',
+          200: '#fffc87',
+          300: '#fff343',
+          400: '#ffe30f',
+          500: '#efca03',
+          600: '#ce9d00',
+          700: '#a47004',
+          800: '#88580b',
+          900: '#734710',
+          950: '#432505',
+        },
+        fireOrange: {
+          50: '#fff6ed',
+          100: '#ffead4',
+          200: '#ffd1a8',
+          300: '#ffb071',
+          400: '#ff7e2e',
+          500: '#fe6211',
+          600: '#ef4707',
+          700: '#c63208',
+          800: '#9d290f',
+          900: '#7e2510',
+          950: '#440f06',
+        },
+        mainWhite: '#f8f8f8',
+      },
+    },
+  },
+  plugins: [],
+}

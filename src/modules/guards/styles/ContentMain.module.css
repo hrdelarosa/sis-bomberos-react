@@ -1,0 +1,19 @@
+.list_scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.list_scroll::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: 1px;
+}
+
+.list_scroll::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 1px;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  .list_scroll {
+    scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+  }
+}
