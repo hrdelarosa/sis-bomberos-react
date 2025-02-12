@@ -6,6 +6,8 @@ import {
   loginRequest,
   verifyTokenRequest,
   getProfileRequest,
+  verifyEmailRequest,
+  resendVerifyEmailRequest,
 } from '../services/auth'
 
 const useAuthStore = create((set) => ({
@@ -14,16 +16,23 @@ const useAuthStore = create((set) => ({
   token: Cookies.get('token') || null,
   isAuthenticated: !!Cookies.get('token'),
   loading: true,
+  loadingSingup: false,
   error: [],
 
   signup: async (input) => {
+    set({ loadingSingup: true })
     try {
       const res = await registerRequest(input)
       const { message } = res
 
-      toast.message(message, {
-        description: 'Pendiente a la validación de su cuenta',
-      })
+      if (message) {
+        set({ loadingSingup: false })
+        toast.message(
+          message,
+          { description: 'Pendiente a la validación de su cuenta' },
+          { duration: 5000 }
+        )
+      }
     } catch (error) {
       if (error instanceof Error) {
         set({ error: [error.message] })
@@ -87,6 +96,29 @@ const useAuthStore = create((set) => ({
       set({ profile: data, loading: false })
     } catch (error) {
       if (error instanceof Error) set({ error: [error.message] })
+    }
+  },
+
+  verifyEmail: async ({ token }) => {
+    try {
+      const res = await verifyEmailRequest({ token })
+      const { message } = res
+
+      toast.success(message, { duration: 5000 })
+    } catch (error) {
+      if (error instanceof Error) set({ error: [error.message] })
+    }
+  },
+
+  resendVerifyEmail: async ({ input }) => {
+    try {
+      const res = await resendVerifyEmailRequest({ input })
+      console.log(res)
+      const { message } = res
+
+      toast.success(message, { duration: 5000 })
+    } catch (error) {
+      if (error instanceof Error) toast.error(error.message)
     }
   },
 

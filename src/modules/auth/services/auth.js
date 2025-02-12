@@ -19,7 +19,6 @@ export async function registerRequest(input) {
         : data.message || 'Error en el registro'
       throw new Error(errorData)
     }
-
     return data
   } catch (error) {
     throw new Error(
@@ -104,6 +103,63 @@ export async function getProfileRequest({ id }) {
       error instanceof Error
         ? error.message
         : 'Error desconocido al validar el token'
+    )
+  }
+}
+
+export async function verifyEmailRequest({ token }) {
+  try {
+    const res = await fetch(`${API}${PATH_API_AUTH.verifyEmail}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+      body: JSON.stringify(token),
+    })
+
+    const data = await res.json()
+
+    if (!res.ok) {
+      const errorData = data.message || 'Error al verificar el correo'
+      throw new Error(errorData)
+    }
+
+    return data
+  } catch (error) {
+    throw new Error(
+      error instanceof Error
+        ? error.message
+        : 'Error desconocido al verificar el correo'
+    )
+  }
+}
+
+export async function resendVerifyEmailRequest({ input }) {
+  try {
+    const res = await fetch(`${API}${PATH_API_AUTH.resendVerifyEmail}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+      body: JSON.stringify(input),
+    })
+
+    const data = await res.json()
+
+    if (!res.ok) {
+      const errorData =
+        data.message || 'Error al reenvio de código de verificación'
+      throw new Error(errorData)
+    }
+
+    return data
+  } catch (error) {
+    throw new Error(
+      error instanceof Error
+        ? error.message
+        : 'Error desconocido al reenvio de código de verificación'
     )
   }
 }

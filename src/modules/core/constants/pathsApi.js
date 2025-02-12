@@ -5,6 +5,8 @@ export const PATH_API_AUTH = {
   login: '/auth/login',
   verify: '/auth/verify-token',
   profile: '/auth/profile',
+  verifyEmail: '/auth/verify-email',
+  resendVerifyEmail: '/auth/resend-verify-email',
 }
 
 export const PATH_API_SERVICES = {

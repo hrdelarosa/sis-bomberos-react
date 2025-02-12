@@ -10,7 +10,7 @@ import MessageError from '../../core/components/UI/MessageError'
 import Button from '../components/Button'
 
 export default function Form() {
-  const { signup, isAuthenticated, error } = useAuthStore()
+  const { signup, isAuthenticated, error, loadingSingup } = useAuthStore()
   const navigate = useNavigate()
   const {
     register,
@@ -20,7 +20,7 @@ export default function Form() {
 
   const onSubmit = async (data) => {
     await signup(data)
-    navigate('/login')
+    navigate('/verify-email')
   }
 
   useEffect(() => {
@@ -94,10 +94,10 @@ export default function Form() {
             <Label htmlFor="constraseña" label="Contraseña" />
             <div className="mt-1.5">
               <Input
-                type="constraseña"
+                type="password"
                 id="constraseña"
                 placeholder="********"
-                {...register('constraseña')}
+                {...register('contraseña')}
                 className={`${
                   errors.constraseña
                     ? 'ring-fireRed-200 focus:ring-fireRed-500'
@@ -117,7 +117,7 @@ export default function Form() {
                 type="password"
                 id="confirmContraseña"
                 placeholder="********"
-                {...register('confirmContraseña')}
+                {...register('confirmarContraseña')}
                 className={`${
                   errors.confirmContraseña
                     ? 'ring-fireRed-200 focus:ring-fireRed-500'
@@ -144,7 +144,7 @@ export default function Form() {
           </p>
         </div>
 
-        <Button text="Registrarse" />
+        <Button text="Registrarse" loading={loadingSingup} />
       </form>
     </ContainerForm>
   )

@@ -7,6 +7,7 @@ import useAuthStore from './modules/auth/store/auth'
 import ProtectedRoute from './modules/ProtectedRoutes/ProtectedRoute'
 import Login from './modules/auth/login/Login'
 import Register from './modules/auth/register/Register'
+import VerifyEmail from './modules/auth/VerifyEmail'
 import Dashboard from './modules/dashboard/Dashboard'
 import Profile from './modules/profile/Profile'
 import Services from './modules/servicios/Services'
@@ -37,6 +38,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/verify-email" element={<VerifyEmail />} />
 
         <Route element={<ProtectedRoute />}>
           <Route path="/" element={<Dashboard />} />
