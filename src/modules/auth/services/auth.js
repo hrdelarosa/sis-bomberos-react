@@ -163,3 +163,66 @@ export async function resendVerifyEmailRequest({ input }) {
     )
   }
 }
+
+export async function requestResetPassword({ input }) {
+  try {
+    const res = await fetch(`${API}${PATH_API_AUTH.requestResetPass}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+      body: JSON.stringify(input),
+    })
+
+    const data = await res.json()
+
+    if (!res.ok) {
+      const errorData = data.errors || [
+        { message: data.message || 'Error al envio del código' },
+      ]
+      throw new Error(
+        JSON.stringify({ message: data.message, errors: errorData })
+      )
+    }
+
+    return data
+  } catch (error) {
+    throw new Error(
+      error instanceof Error
+        ? error.message
+        : 'Error desconocido al envio del código'
+    )
+  }
+}
+
+export async function resetPassRequest({ input }) {
+  try {
+    const res = await fetch(`${API}${PATH_API_AUTH.resetPass}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+      body: JSON.stringify(input),
+    })
+
+    const data = await res.json()
+
+    if (!res.ok) {
+      const errorData = data.errors || [
+        { message: data.message || 'Error al cambiar la contraseña' },
+      ]
+      const isValidationError = !!data.errors
+      throw new Error(JSON.stringify({ errors: errorData, isValidationError }))
+    }
+
+    return data
+  } catch (error) {
+    throw new Error(
+      error instanceof Error
+        ? error.message
+        : 'Error desconocido al cambiar la contraseña'
+    )
+  }
+}

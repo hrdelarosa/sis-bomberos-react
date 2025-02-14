@@ -8,6 +8,8 @@ import {
   getProfileRequest,
   verifyEmailRequest,
   resendVerifyEmailRequest,
+  requestResetPassword,
+  resetPassRequest,
 } from '../services/auth'
 
 const useAuthStore = create((set) => ({
@@ -16,17 +18,17 @@ const useAuthStore = create((set) => ({
   token: Cookies.get('token') || null,
   isAuthenticated: !!Cookies.get('token'),
   loading: true,
-  loadingSingup: false,
+  loadingFetch: false,
   error: [],
 
   signup: async (input) => {
-    set({ loadingSingup: true })
     try {
+      set({ loadingFetch: true })
       const res = await registerRequest(input)
       const { message } = res
 
       if (message) {
-        set({ loadingSingup: false })
+        set({ loadingFetch: false })
         toast.message(
           message,
           { description: 'Pendiente a la validación de su cuenta' },
@@ -35,7 +37,7 @@ const useAuthStore = create((set) => ({
       }
     } catch (error) {
       if (error instanceof Error) {
-        set({ error: [error.message] })
+        set({ loadingFetch: false, error: [error.message] })
         setTimeout(() => set({ error: [] }), 5000)
       }
     }
@@ -113,12 +115,60 @@ const useAuthStore = create((set) => ({
   resendVerifyEmail: async ({ input }) => {
     try {
       const res = await resendVerifyEmailRequest({ input })
-      console.log(res)
       const { message } = res
 
       toast.success(message, { duration: 5000 })
     } catch (error) {
       if (error instanceof Error) toast.error(error.message)
+    }
+  },
+
+  requestResetPassword: async ({ input, onSuccess }) => {
+    try {
+      set({ loadingFetch: true })
+      const res = await requestResetPassword({ input })
+      const { message } = res
+
+      if (message) {
+        set({ loadingFetch: false })
+        toast.success(message, { duration: 3000 })
+        set({ error: [] })
+      }
+      if (onSuccess) onSuccess()
+    } catch (error) {
+      if (error instanceof Error) {
+        set({ loadingFetch: false })
+        const { message, errors } = JSON.parse(error.message)
+        if (errors) {
+          errors.forEach((err) => toast.error(err.message))
+        } else {
+          toast.error(message)
+        }
+      }
+    }
+  },
+
+  resetPass: async ({ input, onSuccess }) => {
+    try {
+      set({ loadingFetch: true })
+      const res = await resetPassRequest({ input })
+      const { message } = res
+
+      if (message) {
+        toast.success(message, { duration: 3000 })
+        set({ loadingFetch: false })
+      }
+      if (onSuccess) onSuccess()
+    } catch (error) {
+      if (error instanceof Error) {
+        set({ loadingFetch: false })
+        const { errors, isValidationError } = JSON.parse(error.message)
+        const errorMessages = errors.map((err) => err.message)
+
+        if (isValidationError) set({ error: errorMessages })
+        else toast.error(errorMessages.join(', '))
+        setTimeout(() => set({ error: [] }), 5000)
+      }
     }
   },
 

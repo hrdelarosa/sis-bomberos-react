@@ -9,7 +9,7 @@ export default function ContainerForm({ error, title, children }) {
       ref={animationParent}
       className="w-full max-w-xl bg-white rounded-lg shadow-md p-6"
     >
-      {error.length > 0 && (
+      {error && error.length > 0 && (
         <div className="flex flex-col gap-0.5 bg-fireRed-500 rounded mb-2.5 p-2.5">
           {error.map((error) =>
             error.split(',').map((err, i) => <Error key={i} err={err} />)

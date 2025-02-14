@@ -7,6 +7,8 @@ export const PATH_API_AUTH = {
   profile: '/auth/profile',
   verifyEmail: '/auth/verify-email',
   resendVerifyEmail: '/auth/resend-verify-email',
+  requestResetPass: '/auth/request-password-reset',
+  resetPass: '/auth/reset-password',
 }
 
 export const PATH_API_SERVICES = {

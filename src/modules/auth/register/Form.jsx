@@ -10,7 +10,7 @@ import MessageError from '../../core/components/UI/MessageError'
 import Button from '../components/Button'
 
 export default function Form() {
-  const { signup, isAuthenticated, error, loadingSingup } = useAuthStore()
+  const { signup, isAuthenticated, error, loadingFetch } = useAuthStore()
   const navigate = useNavigate()
   const {
     register,
@@ -131,21 +131,21 @@ export default function Form() {
           </div>
         </div>
 
-        <div className="">
-          <p className="text-gray-900">
-            {' '}
-            Ya tienes cuenta?{' '}
-            <Link
-              to="/login"
-              className="text-sm text-blue-500 -200 hover:underline mt-4"
-            >
-              Iniciar Sesión
-            </Link>
-          </p>
-        </div>
-
-        <Button text="Registrarse" loading={loadingSingup} />
+        <Button text="Registrarse" loading={loadingFetch} />
       </form>
+
+      <div className="mt-5">
+        <p className="text-gray-500 text-sm text-center">
+          {' '}
+          Ya tienes cuenta?{' '}
+          <Link
+            to="/login"
+            className="text-sm text-blue-500 -200 hover:underline mt-4"
+          >
+            Iniciar Sesión
+          </Link>
+        </p>
+      </div>
     </ContainerForm>
   )
 }

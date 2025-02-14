@@ -91,73 +91,73 @@ export default function Aside() {
             )}
           </div>
 
-          {/* {user && user.rol_nombre === USER_ROLE.ADMINISTRADOR && ( */}
-          <SidebarGroupContent group="soporte" id="soporte">
-            <SidebarMenu to={PATHS.suport.stations.to}>
-              <Stations />
-              {PATHS.suport.stations.path}
-            </SidebarMenu>
+          {user && user.rol_nombre === USER_ROLE.ADMINISTRADOR && (
+            <SidebarGroupContent group="soporte" id="soporte">
+              <SidebarMenu to={PATHS.suport.stations.to}>
+                <Stations />
+                {PATHS.suport.stations.path}
+              </SidebarMenu>
 
-            <div ref={animationParent}>
-              <NavItem
-                label={PATHS.suport.personnel.path}
-                hasChildren={true}
-                isOpen={openSections.personal}
-                onClick={() => toggleSection('personal')}
-                icon={Personnel}
-              />
-              {openSections.personal && (
-                <div className="flex flex-col gap-0.5 py-1.5 pl-4">
-                  <SidebarMenu to={PATHS.suport.guards.to}>
-                    <Guards />
-                    {PATHS.suport.guards.path}
-                  </SidebarMenu>
-                  <SidebarMenu to={PATHS.suport.personnel.to}>
-                    <Personnel />
-                    {PATHS.suport.personnel.path}
-                  </SidebarMenu>
-                  <SidebarMenu to={PATHS.suport.ranks.to}>
-                    <Ranks />
-                    {PATHS.suport.ranks.path}
-                  </SidebarMenu>
-                </div>
-              )}
-            </div>
+              <div ref={animationParent}>
+                <NavItem
+                  label={PATHS.suport.personnel.path}
+                  hasChildren={true}
+                  isOpen={openSections.personal}
+                  onClick={() => toggleSection('personal')}
+                  icon={Personnel}
+                />
+                {openSections.personal && (
+                  <div className="flex flex-col gap-0.5 py-1.5 pl-4">
+                    <SidebarMenu to={PATHS.suport.guards.to}>
+                      <Guards />
+                      {PATHS.suport.guards.path}
+                    </SidebarMenu>
+                    <SidebarMenu to={PATHS.suport.personnel.to}>
+                      <Personnel />
+                      {PATHS.suport.personnel.path}
+                    </SidebarMenu>
+                    <SidebarMenu to={PATHS.suport.ranks.to}>
+                      <Ranks />
+                      {PATHS.suport.ranks.path}
+                    </SidebarMenu>
+                  </div>
+                )}
+              </div>
 
-            <SidebarMenu to={PATHS.suport.roles.to}>
-              <Roles />
-              {PATHS.suport.roles.path}
-            </SidebarMenu>
+              <SidebarMenu to={PATHS.suport.roles.to}>
+                <Roles />
+                {PATHS.suport.roles.path}
+              </SidebarMenu>
 
-            <div ref={animationParent}>
-              <NavItem
-                label={PATHS.suport.units.path}
-                hasChildren={true}
-                isOpen={openSections.units}
-                onClick={() => toggleSection('units')}
-                icon={Truck}
-              />
-              {openSections.units && (
-                <div className="flex flex-col gap-0.5 py-1.5 pl-4">
-                  <SidebarMenu to={PATHS.suport.units.to}>
-                    <Truck />
-                    {PATHS.suport.units.path}
-                  </SidebarMenu>
+              <div ref={animationParent}>
+                <NavItem
+                  label={PATHS.suport.units.path}
+                  hasChildren={true}
+                  isOpen={openSections.units}
+                  onClick={() => toggleSection('units')}
+                  icon={Truck}
+                />
+                {openSections.units && (
+                  <div className="flex flex-col gap-0.5 py-1.5 pl-4">
+                    <SidebarMenu to={PATHS.suport.units.to}>
+                      <Truck />
+                      {PATHS.suport.units.path}
+                    </SidebarMenu>
 
-                  <SidebarMenu to={PATHS.suport.units.type.to}>
-                    <WrenchUnitType />
-                    {PATHS.suport.units.type.path}
-                  </SidebarMenu>
-                </div>
-              )}
-            </div>
+                    <SidebarMenu to={PATHS.suport.units.type.to}>
+                      <WrenchUnitType />
+                      {PATHS.suport.units.type.path}
+                    </SidebarMenu>
+                  </div>
+                )}
+              </div>
 
-            <SidebarMenu to={PATHS.suport.users.to}>
-              <Users />
-              {PATHS.suport.users.path}
-            </SidebarMenu>
-          </SidebarGroupContent>
-          {/* )} */}
+              <SidebarMenu to={PATHS.suport.users.to}>
+                <Users />
+                {PATHS.suport.users.path}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          )}
         </ul>
       </nav>
 

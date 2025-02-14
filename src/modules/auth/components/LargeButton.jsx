@@ -1,8 +1,8 @@
-export default function Button({ loading, children, ...props }) {
+export default function LargeButton({ loading, children, props }) {
   return (
     <button
       {...props}
-      className={`flex items-center gap-1.5 select-none py-1 px-4 rounded-lg bg-fireYellow-400 text-black hover:bg-black hover:text-fireYellow-400 text-sm font-semibold leading-loose transition-colors duration-200 ease-out group`}
+      className="select-none py-1 px-7 rounded-lg bg-fireYellow-400 text-black hover:bg-black hover:text-fireYellow-400 text-sm font-semibold leading-loose transition-colors duration-200 ease-out"
     >
       {loading ? (
         <div className="flex justify-center items-center">

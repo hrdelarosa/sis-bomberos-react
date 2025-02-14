@@ -1,10 +1,11 @@
 import { useForm } from 'react-hook-form'
-import Modal from '../../core/components/modal/Modal'
-import Input from '../../core/components/UI/Input'
-import Label from '../../core/components/UI/Label'
-import MessageError from '../../core/components/UI/MessageError'
-import Button from '../../core/components/UI/Button'
 import useAuthStore from '../store/auth'
+
+import Modal from '../../core/components/modal/Modal'
+import Label from '../../core/components/UI/Label'
+import Input from '../../core/components/UI/Input'
+import MessageError from '../../core/components/UI/MessageError'
+import LargeButton from './LargeButton'
 
 export default function ResendModal({ isModalOpen, closeModal }) {
   const { resendVerifyEmail } = useAuthStore()
@@ -16,7 +17,7 @@ export default function ResendModal({ isModalOpen, closeModal }) {
   } = useForm()
 
   const onSubmit = async (data) => {
-    resendVerifyEmail(data)
+    resendVerifyEmail({ input: data })
     reset()
     closeModal()
   }
@@ -45,7 +46,7 @@ export default function ResendModal({ isModalOpen, closeModal }) {
           </div>
 
           <div className="flex justify-center">
-            <Button>Reenviar código</Button>
+            <LargeButton>Reenviar código</LargeButton>
           </div>
         </form>
       </div>

@@ -1,13 +1,15 @@
-import { useForm } from 'react-hook-form'
-import { MailIcon } from '../core/components/Icons'
-import Input from '../core/components/UI/Input'
-import LayoutAuth from '../core/layout/LayoutAuth'
-import MessageError from '../core/components/UI/MessageError'
 import { useEffect } from 'react'
-import useAuthStore from './store/auth'
-import { useNavigate } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
 import { useModal } from '../core/hooks/modal/useModal'
+import { useNavigate } from 'react-router-dom'
+import { MailIcon } from '../core/components/Icons'
+import useAuthStore from './store/auth'
+
+import LayoutAuth from '../core/layout/LayoutAuth'
+import Input from '../core/components/UI/Input'
+import MessageError from '../core/components/UI/MessageError'
 import ResendModal from './components/ResendModal'
+import LargeButton from './components/LargeButton'
 
 export default function VerifyEmail() {
   const { verifyEmail, isAuthenticated, error } = useAuthStore()
@@ -30,7 +32,6 @@ export default function VerifyEmail() {
 
   return (
     <LayoutAuth>
-      {/* <main className="h-screen w-screen flex flex-col items-center justify-center gap-3 px-5 bg-slate-100/60"> */}
       <section className="flex flex-col gap-2.5 items-center justify-center w-full max-w-xl bg-white p-6 rounded-lg">
         <div className="flex items-center gap-2">
           <h1 className="text-2xl font-bold">Verifica tu correro</h1>
@@ -44,7 +45,7 @@ export default function VerifyEmail() {
 
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="w-full max-w-xs flex flex-col gap-7 mt-2.5"
+          className="w-full max-w-sm flex flex-col gap-7 mt-2.5"
         >
           <div>
             <div className="mt-2">
@@ -54,7 +55,7 @@ export default function VerifyEmail() {
                 placeholder="Código"
                 {...register('token', { required: 'El código es requerido' })}
                 className={`text-sm  ${
-                  errors.nombres
+                  errors.token
                     ? 'ring-fireRed-200 focus:ring-fireRed-500'
                     : 'ring-gray-100 focus:ring-fireYellow-400'
                 }`}
@@ -64,25 +65,23 @@ export default function VerifyEmail() {
           </div>
 
           <div className="flex justify-center">
-            <button className="select-none py-1 px-7 rounded-lg bg-fireYellow-400 text-black hover:bg-black hover:text-fireYellow-400 text-sm font-semibold leading-loose transition-colors duration-200 ease-out">
-              Verificar
-            </button>
+            <LargeButton>Verificar</LargeButton>
           </div>
         </form>
 
         <hr className="bg-slate-50 w-full h-px my-4" />
 
-        <div className="flex items-center gap-7 text-sm">
+        <div className="flex items-center gap-2 text-sm">
           <p>¿No has recibido ningún código?</p>
+
           <button
             onClick={handleModalToggle}
-            className="hover:text-blue-800 transition-colors duration-200 ease-out"
+            className="text-fireOrange-600 hover:text-fireOrange-700 transition-colors duration-200 ease-out -200 hover:underline"
           >
             Reenviar código
           </button>
         </div>
       </section>
-      {/* </main> */}
 
       <ResendModal isModalOpen={isModalOpen} closeModal={closeModal} />
     </LayoutAuth>

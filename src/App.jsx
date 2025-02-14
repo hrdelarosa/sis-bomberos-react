@@ -8,6 +8,7 @@ import ProtectedRoute from './modules/ProtectedRoutes/ProtectedRoute'
 import Login from './modules/auth/login/Login'
 import Register from './modules/auth/register/Register'
 import VerifyEmail from './modules/auth/VerifyEmail'
+import RequestResetPassword from './modules/auth/resetPassword/requestResetPassword'
 import Dashboard from './modules/dashboard/Dashboard'
 import Profile from './modules/profile/Profile'
 import Services from './modules/servicios/Services'
@@ -23,6 +24,7 @@ import Users from './modules/users/Users'
 import GuardPersonal from './modules/guards/GuardPersonal'
 import AddPerGuard from './modules/guards/AddPerGuard'
 import Service from './modules/servicios/Service'
+import ResetPassword from './modules/auth/resetPassword/ResetPassword'
 
 function App() {
   const { checkLogin } = useAuthStore()
@@ -39,6 +41,11 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/verify-email" element={<VerifyEmail />} />
+        <Route
+          path="/request-reset-password"
+          element={<RequestResetPassword />}
+        />
+        <Route path="/reset-password" element={<ResetPassword />} />
 
         <Route element={<ProtectedRoute />}>
           <Route path="/" element={<Dashboard />} />

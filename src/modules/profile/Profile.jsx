@@ -22,8 +22,6 @@ export default function Profile() {
     getServiceByCreator({ id: user.id })
   }, [getProfile, getServiceByCreator, user.id])
 
-  console.log(services)
-
   return (
     <Layout>
       <ContainerPage>
@@ -55,13 +53,19 @@ export default function Profile() {
                 <InfoUser profile={profile} />
 
                 <div className="flex flex-col gap-4 mt-8 h-fit">
-                  <h3 className="text-xl font-medium">{`Ultimos ${services.length} servicios`}</h3>
-                  <ContentServices>
-                    {services &&
-                      services.map((service) => (
-                        <CardService key={service.id} service={service} />
-                      ))}
-                  </ContentServices>
+                  {services.length === 0 ? (
+                    <h3 className="text-xl font-medium">No hay servicios</h3>
+                  ) : (
+                    <>
+                      <h3 className="text-xl font-medium">{`Ultimos ${services.length} servicios`}</h3>
+                      <ContentServices>
+                        {services &&
+                          services.map((service) => (
+                            <CardService key={service.id} service={service} />
+                          ))}
+                      </ContentServices>
+                    </>
+                  )}
                 </div>
               </div>
             </div>

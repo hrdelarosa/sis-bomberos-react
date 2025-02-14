@@ -70,21 +70,28 @@ export default function From() {
           )}
         </div>
 
-        <div className="">
-          <p className="text-gray-900">
-            {' '}
-            No tienes cuenta?{' '}
-            <Link
-              to="/register"
-              className="text-sm text-blue-500 -200 hover:underline mt-4"
-            >
-              Registrarse
-            </Link>
-          </p>
-        </div>
-
         <Button text="Iniciar Sesión" />
       </form>
+
+      <div className="flex justify-between items-center mt-5">
+        <p className="text-gray-500 text-sm">
+          {' '}
+          No tienes cuenta?{' '}
+          <Link
+            to="/register"
+            className="text-sm text-blue-500 -200 hover:underline mt-4"
+          >
+            Registrarse
+          </Link>
+        </p>
+
+        <Link
+          to="/request-reset-password"
+          className="text-sm text-blue-500 -200 hover:underline"
+        >
+          Olvidé mi contraseña
+        </Link>
+      </div>
     </ContainerForm>
   )
 }
