@@ -53,11 +53,55 @@ export default function Form() {
   } = usePersonalSearch({ personal: personal })
   const { register, handleSubmit, watch } = useForm({
     defaultValues: {
+      nombre: '',
+      telefono: '',
+      salida: '',
+      llegada: '',
+      control: '',
+      base: '',
       incidente: SELECTINCIDENTES.OTRO,
+      ubicacion: '',
+      otro: '',
       observaciones: '',
-      abejas: { abejas: '', especifique: '', observaciones: '' },
-      unidades: [],
-      personal: [],
+      incendio: {
+        inmueble: '',
+        inmEspecifique: '',
+        otro: '',
+        otrEspecifique: '',
+      },
+      fugaDerrame: {
+        fuga: '',
+        especifique: '',
+        capacidad: '',
+        empresa: '',
+        material: '',
+        noGuia: '',
+        observaciones: '',
+      },
+      abejas: {
+        abejas: '',
+        especifique: '',
+        observaciones: '',
+      },
+      rescate: {
+        heridos: '',
+        cadaveres: '',
+        ambulancia: '',
+        equipo: '',
+        noPersonal: '',
+        especifique: '',
+      },
+      daños: {
+        material: '',
+        especifique: '',
+        heridos: '',
+        muertos: '',
+        ambulancia: '',
+      },
+      legales: {
+        legales: '',
+        otro: '',
+      },
     },
     resolver: zodResolver(serviceSchema),
   })
@@ -77,11 +121,50 @@ export default function Form() {
       ...data,
       unidades: selectedUnits,
       personal: selectedPersonal,
+      incendio: data.incendio || {
+        inmueble: '',
+        inmEspecifique: '',
+        otro: '',
+        otrEspecifique: '',
+      },
+      fugaDerrame: data.fugaDerrame || {
+        fuga: '',
+        especifique: '',
+        capacidad: '',
+        empresa: '',
+        material: '',
+        noGuia: '',
+        observaciones: '',
+      },
+      abejas: data.abejas || {
+        abejas: '',
+        especifique: '',
+        observaciones: '',
+      },
+      rescate: data.rescate || {
+        heridos: '',
+        cadaveres: '',
+        ambulancia: '',
+        equipo: '',
+        noPersonal: '',
+        especifique: '',
+      },
+      daños: data.daños || {
+        material: '',
+        especifique: '',
+        heridos: '',
+        muertos: '',
+        ambulancia: '',
+      },
+      legales: data.legales || {
+        legales: '',
+        otro: '',
+      },
     }
 
-    // createService({ input })
+    createService({ input })
     console.log(input)
-    // navigate('/services')
+    navigate('/services')
   }
 
   const onError = (errors) => {
@@ -338,36 +421,36 @@ export default function Form() {
             </CardInfoService>
           )}
 
-          {/* {incidente === SELECTINCIDENTES.ABEJAS && ( */}
-          <CardInfoService
-            title="Abejas"
-            className={`${incidente !== SELECTINCIDENTES.ABEJAS && 'hidden'}`}
-          >
-            <GroupInputs className="grid-cols-[3fr,_9fr]">
-              <Select
-                id="abejas"
-                {...register('abejas.abejas')}
-                className="text-sm bg-white focus:bg-gray-50 focus:outline focus:outline-gray-500 ring-gray-300 placeholder:text-gray-500 placeholder:font-normal"
-                options={SELECTABEJAS}
-              />
+          {incidente === SELECTINCIDENTES.ABEJAS && (
+            <CardInfoService
+              title="Abejas"
+              className={`${incidente !== SELECTINCIDENTES.ABEJAS && 'hidden'}`}
+            >
+              <GroupInputs className="grid-cols-[3fr,_9fr]">
+                <Select
+                  id="abejas"
+                  {...register('abejas.abejas')}
+                  className="text-sm bg-white focus:bg-gray-50 focus:outline focus:outline-gray-500 ring-gray-300 placeholder:text-gray-500 placeholder:font-normal"
+                  options={SELECTABEJAS}
+                />
 
+                <Input
+                  id="especifique"
+                  type="text"
+                  placeholder="Especifique"
+                  {...register('abejas.especifique')}
+                  className="text-sm bg-white focus:bg-gray-50 focus:outline focus:outline-gray-500 ring-gray-300 placeholder:text-gray-500 placeholder:font-normal"
+                />
+              </GroupInputs>
               <Input
-                id="especifique"
+                id="observaciones"
                 type="text"
-                placeholder="Especifique"
-                {...register('abejas.especifique')}
+                placeholder="Observaciones"
+                {...register('abejas.observaciones')}
                 className="text-sm bg-white focus:bg-gray-50 focus:outline focus:outline-gray-500 ring-gray-300 placeholder:text-gray-500 placeholder:font-normal"
               />
-            </GroupInputs>
-            <Input
-              id="observaciones"
-              type="text"
-              placeholder="Observaciones"
-              {...register('abejas.observaciones')}
-              className="text-sm bg-white focus:bg-gray-50 focus:outline focus:outline-gray-500 ring-gray-300 placeholder:text-gray-500 placeholder:font-normal"
-            />
-          </CardInfoService>
-          {/* )} */}
+            </CardInfoService>
+          )}
 
           {incidente === SELECTINCIDENTES.RESCATE && (
             <CardInfoService title="Rescate">

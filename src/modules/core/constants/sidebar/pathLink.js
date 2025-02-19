@@ -1,7 +1,7 @@
 export const PATHS = {
   menu: {
     dasboard: {
-      path: 'Dashboard',
+      path: 'Inicio',
       to: '/',
     },
     profile: {
