@@ -164,7 +164,7 @@ export default function Form() {
 
     createService({ input })
     console.log(input)
-    navigate('/services')
+    navigate('/')
   }
 
   const onError = (errors) => {
