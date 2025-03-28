@@ -13,14 +13,17 @@ export default function HeaderSectionUser({
   isUserDropdownOpen,
 }: Props) {
   return (
-    <div className="px-4 relative select-none">
+    <div
+      className="px-4 relative select-none"
+      onClick={(e) => e.stopPropagation()}
+    >
       <Dropdown
         toggleDropdown={toggleUserDropdown}
         menu={isUserDropdownOpen && <MenuUser />}
       >
         <div className="flex items-center justify-between gap-4 rounded-lg p-1.5 text-black hover:bg-gray-100">
-          <div className="flex items-center gap-1.5">
-            <User className="size-8 rounded-lg p-1" />
+          <div className="flex items-center gap-1">
+            <User className="size-6 rounded-lg" />
             <div>
               <p className="truncate font-semibold">Hozmel Roberto</p>
             </div>

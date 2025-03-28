@@ -1,6 +1,14 @@
-export default function Main({ children }: { children: React.ReactNode }) {
+interface Props {
+  children: React.ReactNode
+  closeUserDropdown: () => void
+}
+
+export default function Main({ children, closeUserDropdown }: Props) {
   return (
-    <main className="main-layout flex-1 bg-white px-4 overflow-y-auto overflow-x-auto">
+    <main
+      className="main-layout flex-1 bg-white p-4 pt-0 overflow-y-auto overflow-x-auto"
+      onClick={closeUserDropdown}
+    >
       {children}
     </main>
   )

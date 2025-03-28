@@ -1,3 +1,23 @@
-.sidebar-nav::-webkit-scrollbar {
+.none-scroll::-webkit-scrollbar {
   width: 0;
+}
+
+.main-layout::-webkit-scrollbar {
+  width: 8px;
+}
+
+.main-layout::-webkit-scrollbar-track {
+  background: rgb(241 245 249 / 0.65);
+  border-radius: 1px;
+}
+
+.main-layout::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 1px;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  .main-layout {
+    scrollbar-color: #d1d5db rgb(241 245 249 / 0.65);
+  }
 }

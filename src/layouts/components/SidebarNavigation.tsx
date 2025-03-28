@@ -15,7 +15,7 @@ export default function SidebarNavigation({
 
   return (
     <nav
-      className={`sidebar-nav h-full overflow-y-auto overflow-x-auto ${
+      className={`none-scroll h-full overflow-y-auto overflow-x-auto ${
         isSidebarCollapsed ? 'p-3' : 'p-4'
       }`}
     >
@@ -83,6 +83,13 @@ export default function SidebarNavigation({
             isSidebarCollapsed={isSidebarCollapsed}
           />
 
+          {/* <SidebarMenuItem
+            to={pathsAside.support.units.to}
+            icon={<pathsAside.support.units.icon className="size-5" />}
+            path={pathsAside.support.units.title}
+            isSidebarCollapsed={isSidebarCollapsed}
+          /> */}
+
           <SidebarMenuCollapsible
             onClick={() => toggleNavItem('units')}
             icon={<pathsAside.support.units.icon className="size-5" />}
@@ -99,11 +106,11 @@ export default function SidebarNavigation({
               isSidebarCollapsed={isSidebarCollapsed}
             />
             <SidebarMenuItem
-              to={pathsAside.support.units.items.type.to}
+              to={pathsAside.support.units.items.types.to}
               icon={
-                <pathsAside.support.units.items.type.icon className="size-5" />
+                <pathsAside.support.units.items.types.icon className="size-5" />
               }
-              path={pathsAside.support.units.items.type.title}
+              path={pathsAside.support.units.items.types.title}
               isSidebarCollapsed={isSidebarCollapsed}
             />
           </SidebarMenuCollapsible>

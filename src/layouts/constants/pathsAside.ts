@@ -66,13 +66,14 @@ export const pathsAside = {
     units: {
       title: 'Unidades',
       icon: Truck,
+      to: '/units',
       items: {
         view: {
-          title: 'Unidades',
+          title: 'Ver',
           icon: Truck,
           to: '/units',
         },
-        type: {
+        types: {
           title: 'Tipos',
           icon: Wrench,
           to: '/units/types',
@@ -84,7 +85,7 @@ export const pathsAside = {
       icon: IdCard,
       items: {
         view: {
-          title: 'Personal',
+          title: 'Ver',
           icon: UsersRound,
           to: '/personnel',
         },
@@ -100,7 +101,7 @@ export const pathsAside = {
       icon: Building2,
       items: {
         view: {
-          title: 'Estaciones',
+          title: 'Ver',
           icon: BellElectric,
           to: '/stations',
         },
