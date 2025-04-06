@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import { UnitStore } from '../types/UnitsTypes'
 
 import { getUnitsRequest } from '../services/unitsService'
-import { getTypesUnitRequest } from '../services/typesUnit'
+import { getTypesUnitRequest } from '../services/typesService'
 
 const unitsStore = create<UnitStore>((set) => ({
   units: [],

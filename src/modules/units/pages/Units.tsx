@@ -1,10 +1,13 @@
 import { Plus } from 'lucide-react'
 import { firstCapitalLetter } from '../../core/utils/firstCapital'
 import { useUnits } from '../hooks/useUnits'
+import { useModal } from '../../core/hooks/useModal'
 
 import ButtonAction from '../../core/components/ui/ButtonAction'
+import Modal from '../../core/components/Modal'
+import UnitCreate from '../components/modal/UnitCreate'
 import Filter from '../components/ui/Filter'
-import GraphicChart from '../components/ui/GraphicChart'
+import GraphicChart from '../../core/components/ui/GraphicChart'
 import Table from '../../core/components/Table'
 import UnitsTableHead from '../components/UnitsTableHead'
 import UnitsTableBody from '../components/UnitsTableBody'
@@ -24,8 +27,7 @@ export default function Units() {
     activePercentage,
     filteredUnits,
   } = useUnits()
-
-  console.log(units, types)
+  const { isModalOpen, handleModalToggle, closeModal } = useModal()
 
   return (
     <div>
@@ -35,11 +37,22 @@ export default function Units() {
             <h1 className="text-2xl font-semibold">Listado de Unidades</h1>
 
             <div className="flex gap-2">
-              <ButtonAction className="bg-primary-yellow text-black hover:bg-black hover:text-primary-yellow">
+              <ButtonAction
+                className="bg-primary-yellow text-black hover:bg-black hover:text-primary-yellow"
+                onClick={() => handleModalToggle('create')}
+              >
                 <Plus className="size-4" />
                 Nueva Unidad
               </ButtonAction>
             </div>
+
+            <Modal
+              title="Crear Unidad"
+              isOpneModal={isModalOpen !== null}
+              onClose={closeModal}
+            >
+              <UnitCreate closeModal={closeModal} />
+            </Modal>
           </div>
 
           <div className="p-6 pt-0">
@@ -53,7 +66,7 @@ export default function Units() {
                   <option value="Todos los tipos">Todos los tipos</option>
                   {!errorTypes &&
                     types.map((type) => (
-                      <option key={type.id} value={type.tu_nombre}>
+                      <option key={type.tu_id} value={type.tu_nombre}>
                         {firstCapitalLetter(type.tu_nombre)}
                       </option>
                     ))}
@@ -67,7 +80,7 @@ export default function Units() {
                   <option value="Todos los estados">Todos los estados</option>
                   {!errorState &&
                     states.map((state) => (
-                      <option key={state.id} value={state.est_nombre}>
+                      <option key={state.est_id} value={state.est_nombre}>
                         {firstCapitalLetter(state.est_nombre)}
                       </option>
                     ))}
@@ -88,7 +101,7 @@ export default function Units() {
                 <TableMessage colSpan={4} message={error} />
               ) : filteredUnits.length > 0 ? (
                 filteredUnits.map((unit) => (
-                  <UnitsTableBody key={unit.id} unit={unit} />
+                  <UnitsTableBody key={unit.uni_id} unit={unit} />
                 ))
               ) : (
                 <TableMessage

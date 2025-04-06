@@ -22,7 +22,9 @@ export async function getTypesUnitRequest() {
   } catch (error) {
     throw new Error(
       error instanceof Error
-        ? JSON.stringify({ message: error.message })
+        ? error.message === 'Failed to fetch'
+          ? JSON.stringify({ message: error.message })
+          : error.message
         : 'Error desconocido al obtener los tipos de unidad'
     )
   }

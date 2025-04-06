@@ -1,14 +1,17 @@
 export interface Unit {
-  id: string
-  tu_id_uni: string
+  uni_id: number
+  tu_id_uni: number
+  tu_nombre: string
   uni_numero: string
-  est_id_uni: string
+  est_id_uni: number
+  est_nombre: string
 }
 
 export interface TypeUnit {
-  id: string
+  tu_id: number
   tu_nombre: string
-  est_id_tu: string
+  est_id_tu: number
+  est_nombre: string
 }
 
 export interface UnitStore {
@@ -22,10 +25,21 @@ export interface UnitStore {
   getTypeUnits: () => Promise<void>
 }
 
-export interface UnitsByType {
-  type: string
-  total: number
-  active: number
+export interface TypeUnitWithStats extends TypeUnit {
+  totalUnits: number
+  activeUnits: number
   activePercentage: number
-  state: string
+}
+
+export interface UpdateUnitInputs {
+  estado: number
+}
+
+export interface CreateUnitInputs {
+  tipo: number
+  numero: string
+}
+
+export interface CreateTypeInputs {
+  nombre: string
 }
