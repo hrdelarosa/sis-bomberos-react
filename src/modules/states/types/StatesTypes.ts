@@ -1,5 +1,5 @@
 export interface State {
-  id: string
+  est_id: number
   est_nombre: string
   est_descripcion: string
 }
