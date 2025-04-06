@@ -6,6 +6,8 @@
   --color-secondary-red: #ff8b8b;
   --color-secondary-yellow: #ffffc2;
   --color-primary-white-main: #f9f9fa;
+
+  --color-primary-button-delete: #be0000;
 }
 
 :root {
