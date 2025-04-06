@@ -3,7 +3,7 @@ import { ChartLine } from 'lucide-react'
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   title: string
   total: number
-  active: number | undefined
+  active: number
   percentage: number
 }
 
