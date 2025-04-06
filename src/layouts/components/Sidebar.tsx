@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { pathsAside } from '../constants/pathsAside'
+import { pathsAside } from '../../modules/core/constants/pathsAside'
 
 import ContentLogo from './ui/ContentLogo'
 import SidebarNavigation from './SidebarNavigation'

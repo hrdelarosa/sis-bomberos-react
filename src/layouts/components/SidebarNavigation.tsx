@@ -1,5 +1,5 @@
 import { useNavItem } from '../hooks/useNavItem'
-import { pathsAside } from '../constants/pathsAside'
+import { pathsAside } from '../../modules/core/constants/pathsAside'
 
 import SidebarGroup from './ui/SidebarGroup'
 import SidebarGroupLabel from './ui/SidebarGroupLabel'

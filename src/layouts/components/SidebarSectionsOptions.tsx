@@ -1,4 +1,4 @@
-import { pathsAside } from '../constants/pathsAside'
+import { pathsAside } from '../../modules/core/constants/pathsAside'
 import SidebarMenuItemAction from './ui/SidebarMenuItemAction'
 
 export default function SidebarSectionsOptions({
