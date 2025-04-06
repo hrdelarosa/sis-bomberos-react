@@ -51,13 +51,11 @@ export default function Users() {
                 >
                   <option value="Todos los roles">Todos los roles</option>
                   {!errorRoles &&
-                    roles
-                      .filter((role) => role.est_nombre === 'activo')
-                      .map((role) => (
-                        <option key={role.rol_id} value={role.rol_nombre}>
-                          {firstCapitalLetter(role.rol_nombre)}
-                        </option>
-                      ))}
+                    roles.map((role) => (
+                      <option key={role.rol_id} value={role.rol_nombre}>
+                        {firstCapitalLetter(role.rol_nombre)}
+                      </option>
+                    ))}
                 </Filter>
 
                 <Filter
