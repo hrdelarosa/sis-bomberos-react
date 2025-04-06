@@ -1,36 +1,44 @@
-import { Unit } from '../types/UnitsTypes'
+import { RoleWithStats } from '../types/RolesTypes'
 import { firstCapitalLetter } from '../../core/utils/firstCapital'
 import { useModal } from '../../core/hooks/useModal'
 
 import TableTd from '../../core/components/ui/table/TableTd'
-import GetIcon from './ui/getIcon'
 import BadgeState from '../../core/components/ui/BadgeState'
 import TableButtonsActions from '../../core/components/TableButonsActions'
 import Modal from '../../core/components/Modal'
-import UnitEditing from './modal/UnitEditing'
 import DeleteItem from '../../core/components/DeleteItem'
+import RoleEditing from './modal/RoleEditing'
 
-export default function UnitsTableBody({ unit }: { unit: Unit }) {
+export default function RolesTableBody({ role }: { role: RoleWithStats }) {
   const { isModalOpen, handleModalToggle, closeModal } = useModal()
   const handleDelete = () => {
-    console.log(`Unidad ${unit.uni_numero} eliminada`)
+    console.log(`Rol ${role.rol_nombre} eliminado`)
     closeModal()
   }
 
   return (
     <>
       <tr className="hover:bg-gray-100">
-        <TableTd className="font-medium">{unit.uni_numero}</TableTd>
+        <TableTd className="font-medium">
+          {firstCapitalLetter(role.rol_nombre)}
+        </TableTd>
 
-        <TableTd>
-          <div className="flex items-center gap-2">
-            {<GetIcon type={unit.tu_nombre} size="size-4" />}
-            <span>{firstCapitalLetter(unit.tu_nombre)}</span>
-          </div>
+        <TableTd>{role.rol_descripcion}</TableTd>
+
+        <TableTd className="font-medium">
+          <span className="ml-3">{role.totalUsers}</span>
+        </TableTd>
+
+        <TableTd className="font-medium">
+          <span className="ml-3">{role.activeUsers}</span>
+        </TableTd>
+
+        <TableTd className="font-medium">
+          <span className="ml-3">{role.activePercentage}%</span>
         </TableTd>
 
         <TableTd>
-          <BadgeState state={unit.est_nombre} />
+          <BadgeState state={role.est_nombre} />
         </TableTd>
 
         <TableTd>
@@ -50,15 +58,13 @@ export default function UnitsTableBody({ unit }: { unit: Unit }) {
         onClose={closeModal}
       >
         {isModalOpen === 'edit' ? (
-          <UnitEditing unit={unit} closeModal={closeModal} />
+          <RoleEditing role={role} closeModal={closeModal} />
         ) : (
           isModalOpen === 'delete' && (
             <DeleteItem
               closeModal={closeModal}
               onDelete={handleDelete}
-              message={`la Unidad ${firstCapitalLetter(unit.tu_nombre)} #${
-                unit.uni_numero
-              }`}
+              message={`el Rol ${firstCapitalLetter(role.rol_nombre)}`}
             />
           )
         )}

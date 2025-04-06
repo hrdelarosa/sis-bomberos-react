@@ -1,38 +1,39 @@
-import { Unit } from '../types/UnitsTypes'
-import { firstCapitalLetter } from '../../core/utils/firstCapital'
+import { User } from '../types/UsersTypes'
 import { useModal } from '../../core/hooks/useModal'
+import { firstCapitalLetter } from '../../core/utils/firstCapital'
 
 import TableTd from '../../core/components/ui/table/TableTd'
-import GetIcon from './ui/getIcon'
 import BadgeState from '../../core/components/ui/BadgeState'
 import TableButtonsActions from '../../core/components/TableButonsActions'
+import formatDate from '../../core/utils/formatDate'
 import Modal from '../../core/components/Modal'
-import UnitEditing from './modal/UnitEditing'
 import DeleteItem from '../../core/components/DeleteItem'
+import UserEditing from './modal/UsersEditing'
 
-export default function UnitsTableBody({ unit }: { unit: Unit }) {
+export default function UsersTableBody({ user }: { user: User }) {
   const { isModalOpen, handleModalToggle, closeModal } = useModal()
   const handleDelete = () => {
-    console.log(`Unidad ${unit.uni_numero} eliminada`)
+    console.log(`Usuario ${user.us_correo} eliminado`)
     closeModal()
   }
 
   return (
     <>
-      <tr className="hover:bg-gray-100">
-        <TableTd className="font-medium">{unit.uni_numero}</TableTd>
-
-        <TableTd>
-          <div className="flex items-center gap-2">
-            {<GetIcon type={unit.tu_nombre} size="size-4" />}
-            <span>{firstCapitalLetter(unit.tu_nombre)}</span>
-          </div>
+      <tr key={user.us_id} className="hover:bg-gray-100">
+        <TableTd className="font-medium">
+          {user.us_nombres} {user.us_apellidos}
         </TableTd>
-
+        <TableTd className="font-medium">{user.us_correo}</TableTd>
+        <TableTd>{firstCapitalLetter(user.rol_nombre)}</TableTd>
         <TableTd>
-          <BadgeState state={unit.est_nombre} />
+          <BadgeState state={user.est_nombre} />
         </TableTd>
-
+        <TableTd className="font-medium">
+          <span className="ml-3">{user.us_verificado ? 'Si' : 'No'}</span>
+        </TableTd>
+        <TableTd>{formatDate(user.us_creado)}</TableTd>
+        <TableTd>{formatDate(user.us_actualizacion)}</TableTd>
+        <TableTd className="font-medium">{user.total_servicios}</TableTd>
         <TableTd>
           <TableButtonsActions handleModalToggle={handleModalToggle} />
         </TableTd>
@@ -50,15 +51,13 @@ export default function UnitsTableBody({ unit }: { unit: Unit }) {
         onClose={closeModal}
       >
         {isModalOpen === 'edit' ? (
-          <UnitEditing unit={unit} closeModal={closeModal} />
+          <UserEditing user={user} closeModal={closeModal} />
         ) : (
           isModalOpen === 'delete' && (
             <DeleteItem
               closeModal={closeModal}
               onDelete={handleDelete}
-              message={`la Unidad ${firstCapitalLetter(unit.tu_nombre)} #${
-                unit.uni_numero
-              }`}
+              message={`el Usuario ${user.us_correo}`}
             />
           )
         )}
