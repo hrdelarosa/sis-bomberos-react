@@ -1,29 +1,21 @@
 import { useEffect } from 'react'
-import { Personnel, Rank } from '../types/personnelTypes'
 
+import ranksStore from '../states/ranksStore'
 import personnelStore from '../states/personnelStore'
-import useCalculateStatisticsElement from '../../core/hooks/useCalculateStatisticsElement'
+import { calculateStatisticsRanks } from '../utils/calculateStatisticsRanks'
 import useCalculateStatisticsGeneric from '../../core/hooks/useCalculateStatisticsGeneric'
 
 export function useRanks() {
-  const { personnel, getPersonnel, ranks, getRanks, loadingRanks, errorRanks } =
-    personnelStore()
-  const { statistics: personnelByRank } = useCalculateStatisticsElement<
-    Personnel,
-    Rank
-  >({
-    items: personnel,
-    categories: ranks,
-    getCategoryName: (rank) => rank.ran_nombre,
-    getItemCategory: (person) => person.ran_id_per,
-    isActive: (person) => person.est_id_per === 'activo',
-    getState: (rank) => rank.est_id_ran,
+  const { ranks, getRanks, loading, errorRanks } = ranksStore()
+  const { personnel, getPersonnel } = personnelStore()
+  const { ranksWithUnitPersonnel } = calculateStatisticsRanks({
+    ranks,
+    personnel,
   })
-
   const { activeItems: activeRanks, activePercentage: ranksPercentage } =
     useCalculateStatisticsGeneric({
       data: ranks,
-      isActive: (rank) => rank.est_id_ran === 'activo',
+      isActive: (rank) => rank.est_nombre === 'activo',
     })
 
   useEffect(() => {
@@ -32,11 +24,10 @@ export function useRanks() {
   }, [getPersonnel, getRanks])
 
   return {
-    ranks,
+    ranks: ranksWithUnitPersonnel,
     errorRanks,
-    loadingRanks,
+    loading,
     active: activeRanks,
     activePercentage: ranksPercentage,
-    personnelByRank,
   }
 }

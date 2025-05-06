@@ -1,40 +1,40 @@
 export interface Personnel {
-  id: string
+  per_id: number
   per_nombres: string
   per_apellidos: string
-  per_np: string
-  ran_id_per: string
-  per_base: string
-  gu_id_per: string
-  et_nombre: string
-  per_diasEco: string
-  per_vacaciones: string
-  est_id_per: string
-}
-
-export interface Rank {
-  id: string
+  per_np: number
+  ran_id_per: number
   ran_nombre: string
-  est_id_ran: string
+  per_base: string
+  gu_id_per: number
+  gu_nombre: string
+  et_nombre: string
+  per_diasEco: number
+  per_vacaciones: number
+  est_id_per: number
+  est_nombre: string
 }
 
 export interface PersonnelStore {
   personnel: Personnel[]
-  ranks: Rank[]
   loading: boolean
-  loadingRanks: boolean
-  error: string | null
-  errorRanks: string | null
+  errorPersonnel: string | null
   getPersonnel: () => Promise<void>
-  getRanks: () => Promise<void>
-}
-
-export interface PersonnelByRank {
-  category: string
-  total: number
-  active: number
-  activePercentage: number
-  state: string
+  createPersonnel: ({
+    input,
+  }: {
+    input: CreatePersonnelInputs
+  }) => Promise<void>
+  deletePersonnel: ({ id }: { id: number }) => Promise<void>
+  updatePersonnel: ({
+    id,
+    input,
+  }: {
+    id: number
+    input: UpdatePersonInputs
+  }) => Promise<void>
+  getPersonnelByRank: ({ id }: { id: number }) => Promise<void>
+  getPersonnelByGuard: ({ id }: { id: number }) => Promise<void>
 }
 
 export enum SortBy {
@@ -56,7 +56,16 @@ export interface UseSortedPersonnelReturn {
 export type ChangeSort = UseSortedPersonnelReturn['handleChangeSort']
 
 export interface UpdatePersonInputs {
-  estado: string
-  rango: string
-  guardia: string
+  estado: number
+  rango: number
+  guardia: number
+}
+
+export interface CreatePersonnelInputs {
+  nombre: string
+  apellidos: string
+  np: string
+  rango: number
+  base: string
+  guardia: number
 }

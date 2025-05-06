@@ -4,18 +4,11 @@ import personnelStore from '../states/personnelStore'
 import statesStore from '../../states/states/StatesStore'
 import { useSortedPersonnel } from './useSortedPersonnel'
 import useCalculateStatisticsGeneric from '../../core/hooks/useCalculateStatisticsGeneric'
+import ranksStore from '../states/ranksStore'
 
 export function usePersonnel() {
-  const {
-    personnel,
-    getPersonnel,
-    ranks,
-    getRanks,
-    loading,
-    loadingRanks,
-    error,
-    errorRanks,
-  } = personnelStore()
+  const { personnel, getPersonnel, loading, errorPersonnel } = personnelStore()
+  const { ranks, getRanks, errorRanks } = ranksStore()
   const { states, errorState, getStates } = statesStore()
   const {
     search,
@@ -28,7 +21,7 @@ export function usePersonnel() {
   const { activeItems: active, activePercentage: activePercentage } =
     useCalculateStatisticsGeneric({
       data: personnel,
-      isActive: (person) => person.est_id_per === 'activo',
+      isActive: (person) => person.est_nombre === 'activo',
     })
 
   useEffect(() => {
@@ -38,15 +31,13 @@ export function usePersonnel() {
   }, [getPersonnel, getRanks, getStates])
 
   return {
-    personnel,
-    sortedPersonnel,
-    error,
+    personnel: sortedPersonnel,
+    errorPersonnel,
+    loading,
     ranks,
     errorRanks,
-    loadingRanks,
     states,
     errorState,
-    loading,
     search,
     setSearch,
     setRankFilter,

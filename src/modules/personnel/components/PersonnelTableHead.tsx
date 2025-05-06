@@ -1,6 +1,6 @@
 import { ArrowUpDown } from 'lucide-react'
 import TableTh from '../../core/components/ui/table/TableTh'
-import { ChangeSort, SortBy } from '../types/personnelTypes'
+import { ChangeSort, SortBy } from '../types/PersonnelTypes'
 
 export default function PersonnelTableHead({
   changeSort,

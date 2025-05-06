@@ -3,7 +3,7 @@ import {
   Personnel,
   SortBy,
   UseSortedPersonnelReturn,
-} from '../types/personnelTypes'
+} from '../types/PersonnelTypes'
 
 export function useSortedPersonnel({
   personnel,
@@ -25,11 +25,11 @@ export function useSortedPersonnel({
         persona.per_np.toString().toLowerCase().includes(search.toLowerCase())
 
       const matchesRank =
-        rankFilter === 'Todos los rangos' || persona.ran_id_per === rankFilter
+        rankFilter === 'Todos los rangos' || persona.ran_nombre === rankFilter
 
       const matchesState =
         stateFilter === 'Todos los estados' ||
-        persona.est_id_per === stateFilter
+        persona.est_nombre === stateFilter
 
       return matchesSearch && matchesRank && matchesState
     })
