@@ -1,5 +1,5 @@
-// export const apiURL = 'http://187.217.93.89:3000/api/'
-export const apiURL = 'http://localhost:3000/api/'
+export const apiURL = 'http://187.217.93.89:3000/api/'
+// export const apiURL = 'http://localhost:3000/api/'
 
 export const pathsAPIURL = {
   dashboard: {

@@ -44,8 +44,8 @@ export default function AppRoutes() {
   }, [verifyToken])
 
   return (
-    <BrowserRouter>
-      {/* <BrowserRouter basename="/incidenciasbomberos"> */}
+    // <BrowserRouter>
+    <BrowserRouter basename="/incidenciasbomberos">
       <Routes>
         <Route element={<AuthLayout />}>
           <Route path="/login" element={<Login />} />
