@@ -1,26 +1,20 @@
 import { Plus } from 'lucide-react'
-import { useGuards } from '../hooks/useGuards'
+import { useParams } from 'react-router-dom'
+import { useGuardByStation } from '../hooks/useGuardByStation'
 import { useModal } from '../../core/hooks/useModal'
 
 import ButtonAction from '../../core/components/ui/ButtonAction'
-import Filter from '../../units/components/ui/Filter'
 import Table from '../../core/components/Table'
 import GuardsTableHead from '../components/GuardsTableHead'
 import GuardsTableBody from '../components/GuardsTableBody'
 import TableMessage from '../../core/components/ui/table/TableMessage'
 import Modal from '../../core/components/Modal'
 import GuardCreate from '../components/modal/GuardCreate'
-import SkeletonTable from '../../core/components/skeleton/SkeletonTable'
+import Loader from '../../core/components/ui/Loader'
 
-export default function Guards() {
-  const {
-    filteredGuards,
-    setGuardFilter,
-    errorGuards,
-    loading,
-    stations,
-    errorStations,
-  } = useGuards()
+export default function GuardsByStation() {
+  const { id } = useParams<{ id: string }>()
+  const { guards, errorGuards, loading } = useGuardByStation({ id: Number(id) })
   const { isModalOpen, handleModalToggle, closeModal } = useModal()
 
   return (
@@ -28,7 +22,9 @@ export default function Guards() {
       <div className="flex gap-4 h-full w-full">
         <div className="bg-primary-white-main w-full text-black rounded-lg">
           <div className="flex items-center justify-between p-6">
-            <h1 className="text-2xl font-semibold">Listado de las Guardias</h1>
+            <h1 className="text-2xl font-semibold">
+              Listado de las Guardias - {guards[0]?.et_nombre}
+            </h1>
 
             <div>
               <ButtonAction
@@ -50,38 +46,20 @@ export default function Guards() {
           </div>
 
           <div className="p-6 pt-0">
-            <div className="flex items-center gap-4 mb-6">
-              <Filter
-                label="Estación"
-                htmlFor="estacion"
-                onChange={(e) => setGuardFilter(e.target.value)}
-              >
-                <option value="Todas las estaciones">
-                  Todas las estaciones
-                </option>
-                {!errorStations &&
-                  stations.map((station) => (
-                    <option key={station.et_id} value={station.et_nombre}>
-                      {station.et_nombre}
-                    </option>
-                  ))}
-              </Filter>
-            </div>
-
             <Table head={<GuardsTableHead />}>
               {loading ? (
-                <SkeletonTable colums={3} rows={7} />
+                <Loader />
               ) : errorGuards ? (
                 <TableMessage colSpan={3} message={errorGuards} />
-              ) : filteredGuards.length > 0 ? (
-                filteredGuards.map((guard) => (
+              ) : !guards || guards.length === 0 ? (
+                <TableMessage
+                  colSpan={8}
+                  message="No se han encontrado las guardias por la estación"
+                />
+              ) : (
+                guards.map((guard) => (
                   <GuardsTableBody key={guard.gu_id} guard={guard} />
                 ))
-              ) : (
-                <TableMessage
-                  colSpan={3}
-                  message="No se encontraron las guardias con los filtros seleccionados."
-                />
               )}
             </Table>
           </div>

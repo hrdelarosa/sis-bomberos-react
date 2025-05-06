@@ -4,17 +4,16 @@ import stationsStore from '../states/stationsStore'
 import useCalculateStatisticsGeneric from '../../core/hooks/useCalculateStatisticsGeneric'
 
 export function useStations() {
-  const { stations, getStations, loading, error } = stationsStore()
-
+  const { stations, getStations, loading, errorStations } = stationsStore()
   const { activeItems: active, activePercentage } =
     useCalculateStatisticsGeneric({
       data: stations,
-      isActive: (station) => station.est_id_et === 'activo',
+      isActive: (station) => station.est_nombre === 'activo',
     })
 
   useEffect(() => {
     getStations()
   }, [getStations])
 
-  return { stations, loading, error, active, activePercentage }
+  return { stations, loading, errorStations, active, activePercentage }
 }

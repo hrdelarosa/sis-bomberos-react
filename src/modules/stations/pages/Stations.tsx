@@ -1,5 +1,6 @@
 import { Plus } from 'lucide-react'
 import { useStations } from '../hooks/useStations'
+import { useModal } from '../../core/hooks/useModal'
 
 import ButtonAction from '../../core/components/ui/ButtonAction'
 import GraphicChart from '../../core/components/ui/GraphicChart'
@@ -7,9 +8,14 @@ import Table from '../../core/components/Table'
 import StationTableHead from '../components/StationTableHead'
 import StationTableBody from '../components/StationsTableBody'
 import TableMessage from '../../core/components/ui/table/TableMessage'
+import Modal from '../../core/components/Modal'
+import StationCreate from '../components/modal/StationCreate'
+import SkeletonTable from '../../core/components/skeleton/SkeletonTable'
 
 export default function Stations() {
-  const { stations, loading, error, active, activePercentage } = useStations()
+  const { stations, loading, errorStations, active, activePercentage } =
+    useStations()
+  const { isModalOpen, handleModalToggle, closeModal } = useModal()
 
   return (
     <div>
@@ -22,11 +28,22 @@ export default function Stations() {
               </h1>
 
               <div>
-                <ButtonAction className="bg-primary-yellow text-black hover:bg-black hover:text-primary-yellow">
+                <ButtonAction
+                  className="bg-primary-yellow text-black hover:bg-black hover:text-primary-yellow"
+                  onClick={() => handleModalToggle('create')}
+                >
                   <Plus className="size-4" />
                   Nueva Estación
                 </ButtonAction>
               </div>
+
+              <Modal
+                title="Crear nueva Estación"
+                isOpneModal={isModalOpen !== null}
+                onClose={closeModal}
+              >
+                <StationCreate closeModal={closeModal} />
+              </Modal>
             </div>
 
             <GraphicChart
@@ -40,18 +57,20 @@ export default function Stations() {
 
           <div className="p-6 pt-0">
             <Table head={<StationTableHead />}>
-              {error ? (
-                <TableMessage colSpan={6} message={error} />
+              {loading ? (
+                <SkeletonTable colums={6} rows={8} />
+              ) : errorStations ? (
+                <TableMessage colSpan={6} message={errorStations} />
+              ) : !stations || stations.length === 0 ? (
+                <TableMessage
+                  colSpan={6}
+                  message="No se han encontrado las estaciones"
+                />
               ) : (
-                stations.length > 0 &&
                 stations.map((station) => (
-                  <StationTableBody key={station.id} station={station} />
+                  <StationTableBody key={station.et_id} station={station} />
                 ))
               )}
-              {/* <TableMessage
-                colSpan={4}
-                message="No se encontro personal con los filtros seleccionados."
-              /> */}
             </Table>
           </div>
         </div>

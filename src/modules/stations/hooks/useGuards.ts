@@ -4,7 +4,7 @@ import stationsStore from '../states/stationsStore'
 
 export function useGuards() {
   const { guards, getGuarda, errorGuards, loading } = guardsStore()
-  const { stations, getStations, error } = stationsStore()
+  const { stations, getStations, errorStations } = stationsStore()
   const [guardFilter, setGuardFilter] = useState<string>('Todas las estaciones')
 
   const filteredGuards = useMemo(() => {
@@ -27,6 +27,6 @@ export function useGuards() {
     errorGuards,
     loading,
     stations,
-    error,
+    errorStations,
   }
 }
