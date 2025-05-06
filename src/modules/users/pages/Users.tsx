@@ -8,6 +8,7 @@ import Table from '../../core/components/Table'
 import UsersTableHead from '../components/UsersTableHead'
 import UsersTableBody from '../components/UsersTableBody'
 import TableMessage from '../../core/components/ui/table/TableMessage'
+import SkeletonTable from '../../core/components/skeleton/SkeletonTable'
 
 export default function Users() {
   const {
@@ -39,6 +40,7 @@ export default function Users() {
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-4">
                 <SearchInput
+                  label="Buscar un Usuario"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   placeholder="Buscar por nombre o correo..."
@@ -83,8 +85,10 @@ export default function Users() {
             </div>
 
             <Table head={<UsersTableHead />}>
-              {errorUsers ? (
-                <TableMessage colSpan={8} message={errorUsers} />
+              {loading ? (
+                <SkeletonTable colums={9} rows={7} />
+              ) : errorUsers ? (
+                <TableMessage colSpan={9} message={`errorUsers`} />
               ) : filteredUsers.length > 0 ? (
                 filteredUsers.map((user) => (
                   <UsersTableBody key={user.us_id} user={user} />

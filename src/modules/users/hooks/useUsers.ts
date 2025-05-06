@@ -14,7 +14,7 @@ export function useUsers() {
   const { activeItems: active, activePercentage: activePercentage } =
     useCalculateStatisticsGeneric({
       data: users,
-      isActive: (user) => user.est_id_us === 'activo',
+      isActive: (user) => user.est_nombre === 'activo',
     })
 
   useEffect(() => {

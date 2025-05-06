@@ -9,6 +9,7 @@ import statesStore from '../../../states/states/StatesStore'
 import ButtonAction from '../../../core/components/ui/ButtonAction'
 import rolesStore from '../../../roles/states/rolesStore'
 import ButtonCancel from '../../../core/components/ui/ButtonCancel'
+import usersStore from '../../states/usersStore'
 
 export default function UserEditing({
   user,
@@ -17,6 +18,7 @@ export default function UserEditing({
   user: User
   closeModal: () => void
 }) {
+  const { updateUser } = usersStore()
   const { states, getStates, errorState } = statesStore()
   const { roles, getRoles, errorRoles } = rolesStore()
   const { register, handleSubmit } = useForm<UpdateUserInputs>({
@@ -31,8 +33,8 @@ export default function UserEditing({
     getRoles()
   }, [getStates, getRoles])
 
-  const onSubmit: SubmitHandler<UpdateUserInputs> = (data) => {
-    console.log(data)
+  const onSubmit: SubmitHandler<UpdateUserInputs> = async (data) => {
+    await updateUser({ id: user.us_id, input: data })
     closeModal()
   }
 
@@ -57,7 +59,7 @@ export default function UserEditing({
           label="Estado"
           htmlFor="estado-usuario"
           className="w-full"
-          {...register('estado')}
+          {...register('estado', { valueAsNumber: true })}
         >
           {!errorState &&
             states.map((state) => (
@@ -71,7 +73,7 @@ export default function UserEditing({
           label="Roles"
           htmlFor="roles-usuario"
           className="w-full"
-          {...register('rol')}
+          {...register('rol', { valueAsNumber: true })}
         >
           {!errorRoles &&
             roles.map((rol) => (

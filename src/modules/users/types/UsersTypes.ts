@@ -18,6 +18,14 @@ export interface UsersStore {
   loading: boolean
   errorUsers: string | null
   getUsers: () => Promise<void>
+  deleteUser: ({ id }: { id: number }) => Promise<void>
+  updateUser: ({
+    id,
+    input,
+  }: {
+    id: number
+    input: UpdateUserInputs
+  }) => Promise<void>
 }
 
 export interface UpdateUserInputs {

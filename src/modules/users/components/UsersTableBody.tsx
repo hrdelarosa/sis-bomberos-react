@@ -9,11 +9,14 @@ import formatDate from '../../core/utils/formatDate'
 import Modal from '../../core/components/Modal'
 import DeleteItem from '../../core/components/DeleteItem'
 import UserEditing from './modal/UsersEditing'
+import usersStore from '../states/usersStore'
 
 export default function UsersTableBody({ user }: { user: User }) {
   const { isModalOpen, handleModalToggle, closeModal } = useModal()
-  const handleDelete = () => {
-    console.log(`Usuario ${user.us_correo} eliminado`)
+  const { deleteUser } = usersStore()
+
+  const handleDelete = async () => {
+    await deleteUser({ id: user.us_id })
     closeModal()
   }
 
@@ -42,7 +45,7 @@ export default function UsersTableBody({ user }: { user: User }) {
       <Modal
         title={
           isModalOpen === 'edit'
-            ? 'Editar Unidad'
+            ? 'Editar Usuario'
             : isModalOpen === 'delete'
             ? 'Confirmar Eliminación'
             : ''
@@ -57,7 +60,7 @@ export default function UsersTableBody({ user }: { user: User }) {
             <DeleteItem
               closeModal={closeModal}
               onDelete={handleDelete}
-              message={`el Usuario ${user.us_correo}`}
+              message={user.us_correo}
             />
           )
         )}

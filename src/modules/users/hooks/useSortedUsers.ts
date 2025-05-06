@@ -14,10 +14,10 @@ export function useSortedUsers({ users }: { users: User[] }) {
         role.us_correo.toLowerCase().includes(search.toLowerCase())
 
       const matchesRole =
-        roleFilter === 'Todos los roles' || role.rol_id_us === roleFilter
+        roleFilter === 'Todos los roles' || role.rol_nombre === roleFilter
 
       const matchesState =
-        stateFilter === 'Todos los estados' || role.est_id_us === stateFilter
+        stateFilter === 'Todos los estados' || role.est_nombre === stateFilter
 
       return matchesSearch && matchesRole && matchesState
     })
