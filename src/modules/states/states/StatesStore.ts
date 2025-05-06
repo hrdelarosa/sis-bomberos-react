@@ -19,10 +19,7 @@ const statesStore = create<StateStore>((set) => ({
       if (error instanceof Error) {
         const { message } = JSON.parse(error.message)
 
-        set({
-          states: [],
-          errorState: message,
-        })
+        set({ states: [], errorState: message })
       }
     }
   },
