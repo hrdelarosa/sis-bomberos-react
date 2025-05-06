@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { TypeUnit, UpdateUnitInputs } from '../../types/UnitsTypes'
+import { TypeUnit, UpdateTypeInputs } from '../../types/TypesUnitsTypes'
 import { firstCapitalLetter } from '../../../core/utils/firstCapital'
 
 import Input from '../../../core/components/ui/Input'
@@ -8,6 +8,7 @@ import Select from '../../../core/components/ui/Select'
 import statesStore from '../../../states/states/StatesStore'
 import ButtonAction from '../../../core/components/ui/ButtonAction'
 import ButtonCancel from '../../../core/components/ui/ButtonCancel'
+import typesStore from '../../states/typesStore'
 
 export default function TypeEditing({
   type,
@@ -16,8 +17,9 @@ export default function TypeEditing({
   type: TypeUnit
   closeModal: () => void
 }) {
+  const { updateTypeUnit } = typesStore()
   const { states, getStates, errorState } = statesStore()
-  const { register, handleSubmit } = useForm<UpdateUnitInputs>({
+  const { register, handleSubmit } = useForm<UpdateTypeInputs>({
     defaultValues: {
       estado: type.est_id_tu,
     },
@@ -27,8 +29,8 @@ export default function TypeEditing({
     getStates()
   }, [getStates])
 
-  const onSubmit: SubmitHandler<UpdateUnitInputs> = (data) => {
-    console.log(data)
+  const onSubmit: SubmitHandler<UpdateTypeInputs> = async (data) => {
+    await updateTypeUnit({ id: type.tu_id, input: data })
     closeModal()
   }
 
@@ -45,7 +47,7 @@ export default function TypeEditing({
           label="Estado"
           htmlFor="estado-tipo"
           className="w-full"
-          {...register('estado')}
+          {...register('estado', { valueAsNumber: true })}
         >
           {!errorState &&
             states.map((state) => (

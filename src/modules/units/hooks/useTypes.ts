@@ -1,12 +1,13 @@
 import { useEffect } from 'react'
 
 import unitsStore from '../states/unitsStore'
+import typesStore from '../states/typesStore'
 import { calculateStatisticsTypes } from '../utils/calculateStatisticsTypes'
 import useCalculateStatisticsGeneric from '../../core/hooks/useCalculateStatisticsGeneric'
 
 export function useTypes() {
-  const { units, getUnits, types, getTypeUnits, loadingTypes, errorTypes } =
-    unitsStore()
+  const { units, getUnits } = unitsStore()
+  const { types, getTypeUnits, errorTypes, loading } = typesStore()
   const { typesWithUnitStats } = calculateStatisticsTypes({ types, units })
   const { activeItems: activeTypes, activePercentage: typesPercentage } =
     useCalculateStatisticsGeneric({
@@ -22,7 +23,7 @@ export function useTypes() {
   return {
     types: typesWithUnitStats,
     errorTypes,
-    loadingTypes,
+    loading,
     active: activeTypes,
     activePercentage: typesPercentage,
   }

@@ -1,4 +1,5 @@
-import { TypeUnit, Unit } from '../types/UnitsTypes'
+import { Unit } from '../types/UnitsTypes'
+import { TypeUnit } from '../types/TypesUnitsTypes'
 
 export function calculateStatisticsTypes({
   types,

@@ -7,28 +7,20 @@ export interface Unit {
   est_nombre: string
 }
 
-export interface TypeUnit {
-  tu_id: number
-  tu_nombre: string
-  est_id_tu: number
-  est_nombre: string
-}
-
 export interface UnitStore {
   units: Unit[]
-  types: TypeUnit[]
   loading: boolean
-  loadingTypes: boolean
-  error: string | null
-  errorTypes: string | null
+  errorUnits: string | null
   getUnits: () => Promise<void>
-  getTypeUnits: () => Promise<void>
-}
-
-export interface TypeUnitWithStats extends TypeUnit {
-  totalUnits: number
-  activeUnits: number
-  activePercentage: number
+  createUnit: ({ input }: { input: CreateUnitInputs }) => Promise<void>
+  deleteUnit: ({ id }: { id: number }) => Promise<void>
+  updateUnit: ({
+    id,
+    input,
+  }: {
+    id: number
+    input: UpdateUnitInputs
+  }) => Promise<void>
 }
 
 export interface UpdateUnitInputs {
@@ -38,8 +30,4 @@ export interface UpdateUnitInputs {
 export interface CreateUnitInputs {
   tipo: number
   numero: string
-}
-
-export interface CreateTypeInputs {
-  nombre: string
 }

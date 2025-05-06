@@ -9,11 +9,13 @@ import TableButtonsActions from '../../core/components/TableButonsActions'
 import Modal from '../../core/components/Modal'
 import UnitEditing from './modal/UnitEditing'
 import DeleteItem from '../../core/components/DeleteItem'
+import unitsStore from '../states/unitsStore'
 
 export default function UnitsTableBody({ unit }: { unit: Unit }) {
   const { isModalOpen, handleModalToggle, closeModal } = useModal()
-  const handleDelete = () => {
-    console.log(`Unidad ${unit.uni_numero} eliminada`)
+  const { deleteUnit } = unitsStore()
+  const handleDelete = async () => {
+    await deleteUnit({ id: unit.uni_id })
     closeModal()
   }
 
@@ -56,7 +58,7 @@ export default function UnitsTableBody({ unit }: { unit: Unit }) {
             <DeleteItem
               closeModal={closeModal}
               onDelete={handleDelete}
-              message={`la Unidad ${firstCapitalLetter(unit.tu_nombre)} #${
+              message={`${firstCapitalLetter(unit.tu_nombre)} - #${
                 unit.uni_numero
               }`}
             />

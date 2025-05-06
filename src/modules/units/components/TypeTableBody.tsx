@@ -1,4 +1,4 @@
-import { TypeUnitWithStats } from '../types/UnitsTypes'
+import { TypeUnitWithStats } from '../types/TypesUnitsTypes'
 import { firstCapitalLetter } from '../../core/utils/firstCapital'
 import { useModal } from '../../core/hooks/useModal'
 
@@ -9,11 +9,14 @@ import TableButtonsActions from '../../core/components/TableButonsActions'
 import Modal from '../../core/components/Modal'
 import TypeEditing from './modal/TypeEditing'
 import DeleteItem from '../../core/components/DeleteItem'
+import typesStore from '../states/typesStore'
 
 export default function TypeTableBody({ type }: { type: TypeUnitWithStats }) {
   const { isModalOpen, handleModalToggle, closeModal } = useModal()
-  const handleDelete = () => {
-    console.log(`Tipo ${type.tu_nombre} eliminada`)
+  const { deleteTypeUnit } = typesStore()
+
+  const handleDelete = async () => {
+    await deleteTypeUnit({ id: type.tu_id })
     closeModal()
   }
 
@@ -50,9 +53,9 @@ export default function TypeTableBody({ type }: { type: TypeUnitWithStats }) {
       <Modal
         title={
           isModalOpen === 'edit'
-            ? 'Editar Unidad'
+            ? 'Editar Tipo de Unidad'
             : isModalOpen === 'delete'
-            ? 'Confirmar Eliminación'
+            ? '¿Deseas eliminar el Tipo de Unidad?'
             : ''
         }
         isOpneModal={isModalOpen !== null}
@@ -65,7 +68,7 @@ export default function TypeTableBody({ type }: { type: TypeUnitWithStats }) {
             <DeleteItem
               closeModal={closeModal}
               onDelete={handleDelete}
-              message={`el Tipo ${firstCapitalLetter(type.tu_nombre)}`}
+              message={firstCapitalLetter(type.tu_nombre)}
             />
           )
         )}

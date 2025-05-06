@@ -12,11 +12,12 @@ import Table from '../../core/components/Table'
 import UnitsTableHead from '../components/UnitsTableHead'
 import UnitsTableBody from '../components/UnitsTableBody'
 import TableMessage from '../../core/components/ui/table/TableMessage'
+import SkeletonTable from '../../core/components/skeleton/SkeletonTable'
 
 export default function Units() {
   const {
     units,
-    error,
+    errorUnits,
     loading,
     types,
     errorTypes,
@@ -47,7 +48,7 @@ export default function Units() {
             </div>
 
             <Modal
-              title="Crear Unidad"
+              title="Crear nueva Unidad"
               isOpneModal={isModalOpen !== null}
               onClose={closeModal}
             >
@@ -97,8 +98,10 @@ export default function Units() {
             </div>
 
             <Table head={<UnitsTableHead />}>
-              {error ? (
-                <TableMessage colSpan={4} message={error} />
+              {loading ? (
+                <SkeletonTable colums={4} rows={7} />
+              ) : errorUnits ? (
+                <TableMessage colSpan={4} message={errorUnits} />
               ) : filteredUnits.length > 0 ? (
                 filteredUnits.map((unit) => (
                   <UnitsTableBody key={unit.uni_id} unit={unit} />

@@ -10,10 +10,10 @@ import Table from '../../core/components/Table'
 import TypeTableHead from '../components/TypeTableHead'
 import TypeTableBody from '../components/TypeTableBody'
 import TableMessage from '../../core/components/ui/table/TableMessage'
+import SkeletonTable from '../../core/components/skeleton/SkeletonTable'
 
 export default function Types() {
-  const { types, errorTypes, loadingTypes, active, activePercentage } =
-    useTypes()
+  const { types, errorTypes, loading, active, activePercentage } = useTypes()
   const { isModalOpen, handleModalToggle, closeModal } = useModal()
 
   return (
@@ -37,7 +37,7 @@ export default function Types() {
               </div>
 
               <Modal
-                title="Crear Tipo de Unidad"
+                title="Crear nuevo Tipo de Unidad"
                 isOpneModal={isModalOpen !== null}
                 onClose={closeModal}
               >
@@ -56,10 +56,16 @@ export default function Types() {
 
           <div className="p-6 pt-0">
             <Table head={<TypeTableHead />}>
-              {errorTypes ? (
+              {loading ? (
+                <SkeletonTable colums={6} rows={8} />
+              ) : errorTypes ? (
                 <TableMessage colSpan={6} message={errorTypes} />
+              ) : !types || types.length === 0 ? (
+                <TableMessage
+                  colSpan={8}
+                  message="No se han encontrado los tipos de unidades"
+                />
               ) : (
-                types.length > 0 &&
                 types.map((type) => (
                   <TypeTableBody key={type.tu_id} type={type} />
                 ))

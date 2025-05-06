@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react'
 import unitsStore from '../states/unitsStore'
 import statesStore from '../../states/states/StatesStore'
 import useCalculateStatisticsGeneric from '../../core/hooks/useCalculateStatisticsGeneric'
+import typesStore from '../states/typesStore'
 
 export function useUnits() {
-  const { units, getUnits, types, getTypeUnits, loading, error, errorTypes } =
-    unitsStore()
+  const { units, getUnits, loading, errorUnits } = unitsStore()
+  const { types, getTypeUnits, errorTypes } = typesStore()
   const { states, getStates, errorState } = statesStore()
 
   const { activeItems: active, activePercentage: activePercentage } =
@@ -42,7 +43,7 @@ export function useUnits() {
 
   return {
     units,
-    error,
+    errorUnits,
     loading,
     types,
     errorTypes,

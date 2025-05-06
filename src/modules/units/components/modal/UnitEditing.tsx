@@ -9,6 +9,7 @@ import Select from '../../../core/components/ui/Select'
 import statesStore from '../../../states/states/StatesStore'
 import ButtonAction from '../../../core/components/ui/ButtonAction'
 import ButtonCancel from '../../../core/components/ui/ButtonCancel'
+import unitsStore from '../../states/unitsStore'
 
 export default function UnitEditing({
   unit,
@@ -17,6 +18,7 @@ export default function UnitEditing({
   unit: Unit
   closeModal: () => void
 }) {
+  const { updateUnit } = unitsStore()
   const { states, getStates, errorState } = statesStore()
   const { register, handleSubmit } = useForm<UpdateUnitInputs>({
     defaultValues: {
@@ -28,8 +30,8 @@ export default function UnitEditing({
     getStates()
   }, [getStates])
 
-  const onSubmit: SubmitHandler<UpdateUnitInputs> = (data) => {
-    console.log(data)
+  const onSubmit: SubmitHandler<UpdateUnitInputs> = async (data) => {
+    await updateUnit({ id: unit.uni_id, input: data })
     closeModal()
   }
 
@@ -60,7 +62,7 @@ export default function UnitEditing({
         label="Estado"
         htmlFor="estado-unidad"
         className="w-full"
-        {...register('estado')}
+        {...register('estado', { valueAsNumber: true })}
       >
         {!errorState &&
           states.map((state) => (
