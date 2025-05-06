@@ -1,15 +1,18 @@
 import { Search } from 'lucide-react'
 
-type Props = React.InputHTMLAttributes<HTMLInputElement>
+interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
+  label?: string
+  long?: string
+}
 
-export default function SearchInput({ ...props }: Props) {
+export default function SearchInput({ label, long, ...props }: Props) {
   return (
-    <div className="w-60">
+    <div className={long ? long : 'w-60'}>
       <label
         htmlFor="search"
         className="block text-sm font-medium text-gray-700 mb-1"
       >
-        Buscar un Personal
+        {label ? label : 'Buscar un Personal'}
       </label>
       <div className="relative">
         <Search className="absolute right-2.5 top-1/2 transform -translate-y-1/2 text-gray-400 size-4" />

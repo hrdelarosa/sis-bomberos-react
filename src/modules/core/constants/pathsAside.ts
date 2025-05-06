@@ -37,15 +37,16 @@ export const pathsAside = {
     services: {
       title: 'Servicios',
       icon: FolderOpen,
+      to: '/services',
       items: {
-        create: {
-          title: 'Crear',
-          icon: FilePlus,
-          to: '/services',
-        },
         view: {
           title: 'Ver',
           icon: Files,
+          to: '/services',
+        },
+        create: {
+          title: 'Crear',
+          icon: FilePlus,
           to: '/services/create',
         },
       },
@@ -83,6 +84,7 @@ export const pathsAside = {
     personnel: {
       title: 'Personal',
       icon: IdCard,
+      to: '/personnel',
       items: {
         view: {
           title: 'Ver',
@@ -99,6 +101,7 @@ export const pathsAside = {
     stations: {
       title: 'Estaciones',
       icon: Building2,
+      to: '/stations',
       items: {
         view: {
           title: 'Ver',
@@ -117,7 +120,6 @@ export const pathsAside = {
     logout: {
       title: 'Cerrar Sesión',
       icon: LogOut,
-      action: () => console.log('Cerrar Sesión'),
     },
   },
 }

@@ -25,7 +25,7 @@ export default function Select({
 
       <div className="relative">
         <select
-          className="w-full px-2.5 py-1.5 text-sm border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 appearance-none cursor-pointer"
+          className="w-full px-2.5 py-1.5 text-sm bg-white border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 appearance-none cursor-pointer"
           {...props}
         >
           {children}

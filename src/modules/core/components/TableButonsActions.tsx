@@ -1,6 +1,7 @@
 import { Pencil, Trash2 } from 'lucide-react'
-import ButtonOption from './ui/ButtonOption'
 import { Modal } from '../types/ModalTypes'
+
+import ButtonOption from './ui/ButtonOption'
 
 export default function TableButtonsActions({
   handleModalToggle,

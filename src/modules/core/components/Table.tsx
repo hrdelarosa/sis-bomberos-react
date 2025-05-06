@@ -9,9 +9,9 @@ export default function Table({ head, children }: Props) {
   const [animationParent] = useAutoAnimate()
 
   return (
-    <div className="bg-primary-white-main rounded-lg border-2 border-gray-200 overflow-hidden">
+    <div className="bg-primary-white-main rounded-lg border-2 border-gray-200 overflow-hidden ">
       <div className="overflow-hidden overflow-y-auto overflow-x-auto none-scroll">
-        <table className="min-w-full divide-y divide-gray-300">
+        <table className="min-w-full divide-y divide-gray-300 table-auto">
           <thead className="bg-primary-white-main">
             <tr>{head}</tr>
           </thead>
