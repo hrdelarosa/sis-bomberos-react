@@ -2,12 +2,14 @@ import { useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { Role, UpdateRoleInputs } from '../../types/RolesTypes'
 import { firstCapitalLetter } from '../../../core/utils/firstCapital'
+import statesStore from '../../../states/states/StatesStore'
 
 import Input from '../../../core/components/ui/Input'
 import Select from '../../../core/components/ui/Select'
-import statesStore from '../../../states/states/StatesStore'
 import ButtonAction from '../../../core/components/ui/ButtonAction'
 import ButtonCancel from '../../../core/components/ui/ButtonCancel'
+import rolesStore from '../../states/rolesStore'
+import GroupInputs from '../../../core/components/ui/GroupInputs'
 
 export default function RoleEditing({
   role,
@@ -16,6 +18,7 @@ export default function RoleEditing({
   role: Role
   closeModal: () => void
 }) {
+  const { updateRole } = rolesStore()
   const { states, getStates, errorState } = statesStore()
   const { register, handleSubmit } = useForm<UpdateRoleInputs>({
     defaultValues: {
@@ -27,14 +30,14 @@ export default function RoleEditing({
     getStates()
   }, [getStates])
 
-  const onSubmit: SubmitHandler<UpdateRoleInputs> = (data) => {
-    console.log(data)
+  const onSubmit: SubmitHandler<UpdateRoleInputs> = async (data) => {
+    await updateRole({ id: role.rol_id, input: data })
     closeModal()
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="grid grid-cols-[1fr_3fr] gap-5 mb-4">
+      <GroupInputs className="grid-cols-[1fr_3fr] mb-2.5">
         <Input
           label="Rol"
           value={firstCapitalLetter(role.rol_nombre)}
@@ -48,12 +51,14 @@ export default function RoleEditing({
           disabled
           className="disabled:bg-gray-100/70 disabled:ring-gray-200"
         />
-      </div>
+      </GroupInputs>
+
       <Select
         label="Estado"
-        htmlFor="estado-tipo"
+        htmlFor="estado-rol"
         className="w-full"
-        {...register('estado')}
+        defaultValue={role.est_id_rol}
+        {...register('estado', { valueAsNumber: true })}
       >
         {!errorState &&
           states.map((state) => (

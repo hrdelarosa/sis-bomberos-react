@@ -17,6 +17,15 @@ export interface RolesStore {
   loading: boolean
   errorRoles: string | null
   getRoles: () => Promise<void>
+  createRole: ({ input }: { input: CreateRoleInputs }) => Promise<void>
+  deleteRole: ({ id }: { id: number }) => Promise<void>
+  updateRole: ({
+    id,
+    input,
+  }: {
+    id: number
+    input: UpdateRoleInputs
+  }) => Promise<void>
 }
 
 export interface UsersByRole {

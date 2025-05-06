@@ -1,5 +1,6 @@
 import { ListPlus } from 'lucide-react'
 import { useRoles } from '../hooks/useRoles'
+import { useModal } from '../../core/hooks/useModal'
 
 import ButtonAction from '../../core/components/ui/ButtonAction'
 import GraphicChart from '../../core/components/ui/GraphicChart'
@@ -7,9 +8,9 @@ import Table from '../../core/components/Table'
 import RolesTableHead from '../components/RolesTableHead'
 import RolesTableBody from '../components/RolesTableBody'
 import TableMessage from '../../core/components/ui/table/TableMessage'
-import { useModal } from '../../core/hooks/useModal'
 import Modal from '../../core/components/Modal'
 import RoleCreate from '../components/modal/RoleCreate'
+import SkeletonTable from '../../core/components/skeleton/SkeletonTable'
 
 export default function Roles() {
   const { roles, errorRoles, loading, active, activePercentage } = useRoles()
@@ -53,10 +54,16 @@ export default function Roles() {
 
           <div className="p-6 pt-0">
             <Table head={<RolesTableHead />}>
-              {errorRoles ? (
+              {loading ? (
+                <SkeletonTable colums={7} rows={8} />
+              ) : errorRoles ? (
                 <TableMessage colSpan={7} message={errorRoles} />
+              ) : !roles || roles.length === 0 ? (
+                <TableMessage
+                  colSpan={8}
+                  message="No se han encontrado los roles"
+                />
               ) : (
-                roles.length > 0 &&
                 roles.map((role) => (
                   <RolesTableBody key={role.rol_id} role={role} />
                 ))

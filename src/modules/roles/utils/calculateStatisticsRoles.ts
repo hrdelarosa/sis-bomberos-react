@@ -17,7 +17,9 @@ export default function calculateStatisticsRoles({
       (user) => user.est_nombre === 'activo'
     ).length
     const activePercentage =
-      totalUsers > 0 ? (activeUsers / totalUsers) * 100 : 0
+      totalUsers > 0
+        ? parseFloat(((activeUsers / totalUsers) * 100).toFixed(2))
+        : 0
 
     return {
       ...rol,

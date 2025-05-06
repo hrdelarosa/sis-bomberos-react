@@ -8,11 +8,14 @@ import TableButtonsActions from '../../core/components/TableButonsActions'
 import Modal from '../../core/components/Modal'
 import DeleteItem from '../../core/components/DeleteItem'
 import RoleEditing from './modal/RoleEditing'
+import rolesStore from '../states/rolesStore'
 
 export default function RolesTableBody({ role }: { role: RoleWithStats }) {
   const { isModalOpen, handleModalToggle, closeModal } = useModal()
-  const handleDelete = () => {
-    console.log(`Rol ${role.rol_nombre} eliminado`)
+  const { deleteRole } = rolesStore()
+
+  const handleDelete = async () => {
+    await deleteRole({ id: role.rol_id })
     closeModal()
   }
 
@@ -49,9 +52,9 @@ export default function RolesTableBody({ role }: { role: RoleWithStats }) {
       <Modal
         title={
           isModalOpen === 'edit'
-            ? 'Editar Unidad'
+            ? 'Editar Rol'
             : isModalOpen === 'delete'
-            ? 'Confirmar Eliminación'
+            ? '¿Deseas eliminar el Rol?'
             : ''
         }
         isOpneModal={isModalOpen !== null}
@@ -64,7 +67,7 @@ export default function RolesTableBody({ role }: { role: RoleWithStats }) {
             <DeleteItem
               closeModal={closeModal}
               onDelete={handleDelete}
-              message={`el Rol ${firstCapitalLetter(role.rol_nombre)}`}
+              message={firstCapitalLetter(role.rol_nombre)}
             />
           )
         )}
