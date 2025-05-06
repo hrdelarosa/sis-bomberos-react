@@ -1,5 +1,5 @@
 import { useAutoAnimate } from '@formkit/auto-animate/react'
-import { ChevronDown, ChevronUp } from 'lucide-react'
+import { ChevronDown, ChevronRight } from 'lucide-react'
 
 interface Props {
   onClick: () => void
@@ -40,9 +40,9 @@ export default function SidebarMenuCollapsible({
 
           {!isSidebarCollapsed &&
             (isOpen ? (
-              <ChevronUp className="size-5" />
-            ) : (
               <ChevronDown className="size-5" />
+            ) : (
+              <ChevronRight className="size-5" />
             ))}
         </div>
       </li>

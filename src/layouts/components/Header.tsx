@@ -1,5 +1,6 @@
 import { PanelLeft } from 'lucide-react'
 import HeaderSectionUser from './HeaderSectionUser'
+import Breadcrumb from './ui/Breadcrumb'
 
 interface Props {
   toggleSidebar: () => void
@@ -30,9 +31,7 @@ export default function Header({
 
         <div className="w-px h-4 mr-2 bg-gray-300"></div>
 
-        <nav className="text-sm text-gray-600">
-          <span>Inicio</span> / <span className="font-semibold">Dashboard</span>
-        </nav>
+        <Breadcrumb />
       </div>
 
       <HeaderSectionUser

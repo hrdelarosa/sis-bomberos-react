@@ -5,6 +5,7 @@ import SidebarGroup from './ui/SidebarGroup'
 import SidebarGroupLabel from './ui/SidebarGroupLabel'
 import SidebarMenuItem from './ui/SidebarMenuItem'
 import SidebarMenuCollapsible from './ui/SidebarMenuCollapsible'
+import authStore from '../../modules/auth/states/authStore'
 
 export default function SidebarNavigation({
   isSidebarCollapsed,
@@ -12,6 +13,7 @@ export default function SidebarNavigation({
   isSidebarCollapsed: boolean
 }) {
   const { toggleNavItem, isNavItemsExpanded } = useNavItem()
+  const { user } = authStore()
 
   return (
     <nav
@@ -70,18 +72,23 @@ export default function SidebarNavigation({
             label={pathsAside.support.title}
             isSidebarCollapsed={isSidebarCollapsed}
           />
-          <SidebarMenuItem
-            to={pathsAside.support.users.to}
-            icon={<pathsAside.support.users.icon className="size-5" />}
-            path={pathsAside.support.users.title}
-            isSidebarCollapsed={isSidebarCollapsed}
-          />
-          <SidebarMenuItem
-            to={pathsAside.support.roles.to}
-            icon={<pathsAside.support.roles.icon className="size-5" />}
-            path={pathsAside.support.roles.title}
-            isSidebarCollapsed={isSidebarCollapsed}
-          />
+
+          {user && user.rol_nombre === 'administrador' && (
+            <>
+              <SidebarMenuItem
+                to={pathsAside.support.users.to}
+                icon={<pathsAside.support.users.icon className="size-5" />}
+                path={pathsAside.support.users.title}
+                isSidebarCollapsed={isSidebarCollapsed}
+              />
+              <SidebarMenuItem
+                to={pathsAside.support.roles.to}
+                icon={<pathsAside.support.roles.icon className="size-5" />}
+                path={pathsAside.support.roles.title}
+                isSidebarCollapsed={isSidebarCollapsed}
+              />
+            </>
+          )}
 
           {/* <SidebarMenuItem
             to={pathsAside.support.units.to}

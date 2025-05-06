@@ -10,8 +10,8 @@ export default function Dropdown({ toggleDropdown, children, menu }: Props) {
   const [animationParent] = useAutoAnimate()
 
   return (
-    <div ref={animationParent}>
-      <div className="cursor-pointer relative w-full" onClick={toggleDropdown}>
+    <div ref={animationParent} className="relative">
+      <div className="cursor-pointer w-full" onClick={toggleDropdown}>
         {children}
       </div>
       {menu}
