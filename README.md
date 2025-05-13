@@ -1,54 +1,89 @@
-# React + TypeScript + Vite
+# Sistema de Gestión para Bomberos - SIS Bomberos
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Sistema web desarrollado con React, TypeScript y Vite para la gestión de operaciones y recursos en estaciones de bomberos. Este proyecto forma parte del servicio social de [Tu Nombre] en [Nombre de la institución o dependencia].
 
-Currently, two official plugins are available:
+<details>
+<summary>Tabla de contenido</summary>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Sistema de Gestión para Bomberos - SIS Bomberos](#sistema-de-gestión-para-bomberos---sis-bomberos)
+  - [🧩 Objetivo del Proyecto](#-objetivo-del-proyecto)
+  - [⚙️ Tecnologías Utilizadas](#️-tecnologías-utilizadas)
+  - [🏗️ Estructura del Proyecto](#️-estructura-del-proyecto)
+  - [🚀 Instalación y Ejecución](#-instalación-y-ejecución)
+      - [1. Clonar el repositorio:](#1-clonar-el-repositorio)
+        - [2. Instalar dependencias:](#2-instalar-dependencias)
+        - [3. Ejecutar la aplicación en modo desarrollo:](#3-ejecutar-la-aplicación-en-modo-desarrollo)
+  - [📚 Funcionalidades Principales](#-funcionalidades-principales)
+  - [📸 Capturas de Pantalla](#-capturas-de-pantalla)
+  - [👨‍💻 Autores](#-autores)
+</details>
 
-## Expanding the ESLint configuration
+## 🧩 Objetivo del Proyecto
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Diseñar e implementar una aplicación web que permita a las estaciones de bomberos gestionar eficientemente sus recursos, personal y operaciones, mejorando la respuesta ante emergencias y la administración interna.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## ⚙️ Tecnologías Utilizadas
+
+- **React:** Biblioteca para la construcción de interfaces de usuario.
+- **TypeScript:** Superset de JavaScript que añade tipado estático.
+- **Vite:** Herramienta de desarrollo que ofrece un entorno rápido y moderno.
+- **ESLint:** Herramienta para el análisis de código y mantenimiento de buenas prácticas.
+- **Node.js:** Entorno de ejecución para JavaScript en el servidor.
+
+## 🏗️ Estructura del Proyecto
+
+```python
+sis-bomberos-react/
+├── public/ # Archivos públicos y estáticos
+├── src/ # Código fuente de la aplicación
+│ ├── components/ # Componentes reutilizables de React
+│ ├── pages/ # Páginas principales de la aplicación
+│ ├── services/ # Servicios y lógica de negocio
+│ ├── App.tsx # Componente principal de la aplicación
+│ └── main.tsx # Punto de entrada de la aplicación
+├── package.json # Dependencias y scripts del proyecto
+├── tsconfig.json # Configuración de TypeScript
+└── vite.config.ts # Configuración de Vite
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🚀 Instalación y Ejecución
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+#### 1. Clonar el repositorio:
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```bash
+git clone https://github.com/hrdelarosa/sis-bomberos-react.git
+cd sis-bomberos-react
 ```
+
+##### 2. Instalar dependencias:
+
+```bash
+npm install
+```
+
+##### 3. Ejecutar la aplicación en modo desarrollo:
+
+```bash
+npm run dev
+```
+
+La aplicación estará disponible en http://localhost:5173.
+
+## 📚 Funcionalidades Principales
+
+- Registro y gestión de personal de bomberos.
+- Administración de equipos y recursos disponibles.
+- Registro y seguimiento de incidentes y emergencias.
+- Generación de reportes y estadísticas operativas.
+
+## 📸 Capturas de Pantalla
+
+Nota: Incluye aquí capturas de pantalla de la aplicación en funcionamiento para ilustrar su uso.
+
+## 👨‍💻 Autores
+
+Nombres: Hozmel Roberto De La Rosa Rendón - Jonas Jafert Salinas Aguilar
+
+Correo electrónico: 20443301@uagro.mx
+
+Institución: H. Ayuntamiento Constitucional de Acapulco de Juárez
