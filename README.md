@@ -80,7 +80,7 @@ La aplicación estará disponible en http://localhost:5173.
 
 - Generación y consulta de reportes de servicios.
 - Registro y gestión de personal de bomberos.
-- Administración de equipos y recursos disponibles.\*\*\*\*
+- Administración de equipos y recursos disponibles.
 - Seguimiento de estadísticas.
 
 ## 📸 Capturas de Pantalla
